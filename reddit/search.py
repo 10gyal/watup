@@ -5,6 +5,7 @@ from typing import List, Dict, Optional
 from auth import get_reddit_instance
 from db import RedditDB
 from posts import get_subreddit_posts, format_post_for_display
+from post_filter_agent import get_informative_posts
 
 def load_subreddits_from_file(file_path: str) -> Optional[List[Dict[str, str]]]:
     """
@@ -105,7 +106,9 @@ def search_subreddits(keyword: str, limit: int = 5, save_to_db: bool = True) -> 
                     print(f"\nFetching posts from r/{subreddit['display_name']}...")
                     posts = get_subreddit_posts(subreddit['display_name'], limit=5)
                     if posts:
-                        db.record_posts(search_id, posts)
+                        # Analyze posts for informativeness
+                        processed_posts = get_informative_posts(posts)
+                        db.record_posts(search_id, processed_posts)
                     
                 db.close()
             except Exception as e:
@@ -146,7 +149,9 @@ def main():
                     print(f"\nFetching posts from r/{subreddit['display_name']}...")
                     posts = get_subreddit_posts(subreddit['display_name'], limit=5)
                     if posts:
-                        db.record_posts(search_id, posts)
+                        # Analyze posts for informativeness
+                        processed_posts = get_informative_posts(posts)
+                        db.record_posts(search_id, processed_posts)
                     
                 db.close()
             except Exception as e:
@@ -165,6 +170,8 @@ def main():
             if args.show_posts:
                 posts = get_subreddit_posts(subreddit['display_name'], limit=5)
                 if posts:
+                    # Analyze posts for informativeness before displaying
+                    posts = get_informative_posts(posts)
                     print("   Top posts from the last 24 hours:")
                     for post in posts:
                         print("\n   " + "-"*76)

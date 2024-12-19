@@ -17,7 +17,7 @@ class RedditDB:
         """Create necessary tables if they don't exist."""
         cursor = self.conn.cursor()
         
-        # Create tables if they don't exist
+        # Create tables with proper schema
         cursor.execute('''
         CREATE TABLE IF NOT EXISTS reddit_searches (
             id TEXT PRIMARY KEY,
@@ -34,6 +34,7 @@ class RedditDB:
             subreddit_search_id TEXT NOT NULL,
             created_at TIMESTAMP NOT NULL,
             post_data JSON NOT NULL,
+            is_informative BOOLEAN NOT NULL DEFAULT FALSE,
             FOREIGN KEY (subreddit_search_id) REFERENCES reddit_searches(id),
             UNIQUE(post_id, subreddit_search_id)
         )
@@ -83,15 +84,26 @@ class RedditDB:
         
         for post in posts:
             try:
+                # Get is_informative value, ensuring it's treated as a proper boolean
+                is_informative = post.get('is_informative')
+                print(f"DB: Received post {post['id']} with is_informative = {is_informative} (type: {type(is_informative)})")
+                
+                if not isinstance(is_informative, bool):
+                    print(f"DB: Converting non-boolean value to False for post {post['id']}")
+                    is_informative = False
+                
+                # Store complete post data
+                print(f"DB: Storing post {post['id']} with is_informative = {is_informative}")
                 cursor.execute('''
-                INSERT INTO subreddit_posts (id, post_id, subreddit_search_id, created_at, post_data)
-                VALUES (?, ?, ?, ?, ?)
+                INSERT INTO subreddit_posts (id, post_id, subreddit_search_id, created_at, post_data, is_informative)
+                VALUES (?, ?, ?, ?, ?, ?)
                 ''', (
                     str(uuid.uuid4()),
                     post['id'],
                     subreddit_search_id,
                     datetime.now().isoformat(),
-                    json.dumps(post)
+                    json.dumps(post),  # Store complete post data
+                    1 if is_informative else 0  # SQLite doesn't have a native boolean type
                 ))
             except sqlite3.IntegrityError:
                 # Skip if this post already exists for this subreddit search
@@ -114,7 +126,8 @@ class RedditDB:
         cursor.execute('''
         SELECT 
             s.id, s.keyword, s.created_at, s.subreddit,
-            p.post_data
+            p.post_data,
+            p.is_informative
         FROM reddit_searches s
         LEFT JOIN subreddit_posts p ON s.id = p.subreddit_search_id
         ORDER BY s.created_at DESC, p.created_at DESC
@@ -132,9 +145,18 @@ class RedditDB:
                     'posts': []
                 }
             if row[4]:  # If there are posts
-                searches[search_id]['posts'].append(json.loads(row[4]))
+                post_data = json.loads(row[4])
+                post_data['is_informative'] = bool(row[5])  # Convert SQLite integer back to boolean
+                searches[search_id]['posts'].append(post_data)
         
         return list(searches.values())[:limit]
+
+    def drop_tables(self):
+        """Drop all tables from the database."""
+        cursor = self.conn.cursor()
+        cursor.execute("DROP TABLE IF EXISTS subreddit_posts")
+        cursor.execute("DROP TABLE IF EXISTS reddit_searches")
+        self.conn.commit()
 
     def close(self):
         """Close the database connection."""

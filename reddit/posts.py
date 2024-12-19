@@ -52,13 +52,17 @@ def get_subreddit_posts(subreddit_name: str, limit: int = 10) -> List[Dict[str, 
 def format_post_for_display(post: Dict[str, Any]) -> str:
     """Format a post for console display."""
     created_time = datetime.utcfromtimestamp(post['created_utc']).strftime('%Y-%m-%d %H:%M:%S UTC')
+    is_informative = post.get('is_informative')
+    informative_status = f"[INFORMATIVE]" if is_informative else "[NOT INFORMATIVE]" if is_informative is not None else ""
+    
     return (
-        f"Title: {post['title']}\n"
+        f"Title: {post['title']} {informative_status}\n"
         f"Score: {post['score']:,} (ratio: {post['upvote_ratio']:.2%})\n"
         f"Comments: {post['num_comments']:,}\n"
         f"Posted: {created_time}\n"
         f"Author: u/{post['author']}\n"
         f"URL: https://reddit.com{post['permalink']}\n"
+        + (f"Content: {post['selftext'][:200]}...\n" if post.get('selftext') else "")
     )
 
 if __name__ == '__main__':
