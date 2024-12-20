@@ -147,7 +147,7 @@ def main():
                 print("\nFetching top posts from each subreddit...")
                 for subreddit, search_id in zip(results, search_ids):
                     print(f"\nFetching posts from r/{subreddit['display_name']}...")
-                    posts = get_subreddit_posts(subreddit['display_name'], limit=5)
+                    posts = get_subreddit_posts(subreddit['display_name'], limit=20)
                     if posts:
                         # Analyze posts for informativeness
                         processed_posts = get_informative_posts(posts)

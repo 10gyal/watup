@@ -101,6 +101,26 @@ async def filter_posts(posts: List[Dict[str, Any]], batch_size: int = 5) -> List
             post["is_informative"] = False
         return posts
 
+def filter_by_metrics(posts: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """
+    Filter posts based on engagement metrics.
+    
+    Args:
+        posts: List of posts to filter
+        
+    Returns:
+        List of posts that meet the minimum criteria:
+        - Score >= 20
+        - Number of comments >= 5
+        - Upvote ratio >= 70%
+    """
+    return [
+        post for post in posts
+        if post.get("score", 0) >= 20
+        and post.get("num_comments", 0) >= 5
+        and post.get("upvote_ratio", 0) * 100 >= 70
+    ]
+
 def get_informative_posts(
     posts: List[Dict[str, Any]], 
     batch_size: int = 5
@@ -113,7 +133,7 @@ def get_informative_posts(
         batch_size: Number of posts to process concurrently. Must be positive.
         
     Returns:
-        List of posts with is_informative field added
+        List of posts with is_informative field added that meet minimum engagement criteria
     
     Raises:
         ValueError: If batch_size is less than 1
@@ -123,5 +143,9 @@ def get_informative_posts(
         
     if not posts:
         return []
-        
-    return asyncio.run(filter_posts(posts, batch_size))
+    
+    # First filter by metrics to reduce unnecessary content analysis
+    filtered_posts = filter_by_metrics(posts)
+    
+    # Then analyze content of remaining posts
+    return asyncio.run(filter_posts(filtered_posts, batch_size))
