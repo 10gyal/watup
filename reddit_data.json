@@ -1,0 +1,46 @@
+[
+  {
+    "post_id": "1hir24l",
+    "post_content": "OpenAI o3 is equivalent to the #175 best human competitive coder on the planet.",
+    "post_url": "https://i.redd.it/kwdo648cx18e1.png",
+    "score": 449,
+    "author": "MetaKnowing",
+    "created_utc": 1734721417.0,
+    "num_comments": 136,
+    "subreddit": "OpenAI",
+    "comments": "\n  └─ CS job market for junior hiring is about to get even tougher...\n     Score: 180 | Author: TheInfiniteUniverse_\n\n      └─ FYI, the more powerful 03 model costs like $7500 in compute per task. The arc agi benchmark cost them around $1.6 million to run.\n         Score: 19 | Author: gthing\n\n          └─ How much do you think a fully burdened cost of a decent engineer is with healthcare, salary, insurance, and retirement benefits?\n             Score: 9 | Author: altitude-nerd\n\n          └─ the training of early LLM was super expensive, too. so?\n             Score: 2 | Author: ecnecn\n\n      └─ Yet again I have to remind people that it's not solving one-off coding problems that makes someone an engineer. I can't even describe to you the sprawling spaghetti of integrated microservices each with huge repositories of code that would make an extremely costly context window to routinely stay up to date on. And you have to do that while fulfilling customer demands strategically. \n\nAutonomous agents have been interesting but still quite lacking.\n         Score: 21 | Author: forever_downstream\n\n          └─ Are you saying 2026?\n             Score: 12 | Author: VoloNoscere\n\n          └─ They don't have to solve all problems all the time. They just have to time/cost-effectively solve some problems sometimes to eliminate many jobs (especially junior or even mid-level jobs) - I see senior devs taking lower-tier jobs just to stay employed.\n             Score: 8 | Author: TheGillos\n\n  └─ Glad I just retired from development.\n     Score: 79 | Author: santaclaws_\n\n      └─ Pls tell what you are doing now\n         Score: 6 | Author: naastiknibba95\n\n          └─ Not much. I'm 67. I invested in real estate, put money in a 401K and stocks. No more working for me.\n             Score: 26 | Author: santaclaws_\n\n      └─ retired to do what? I need money to feed me.\n         Score: 7 | Author: Double-Cricket-7067\n\n          └─ There are other ways to make money and coding was already a pretty lame one as it was, lol.\n             Score: -23 | Author: akablacktherapper"
+  },
+  {
+    "post_id": "1hipyjc",
+    "post_content": "ARC-AGI has fallen to o3",
+    "post_url": "https://i.redd.it/0oaryqpjo18e1.png",
+    "score": 428,
+    "author": "MetaKnowing",
+    "created_utc": 1734718456.0,
+    "num_comments": 201,
+    "subreddit": "OpenAI",
+    "comments": "\n  └─ https://arcprize.org/blog/oai-o3-pub-breakthrough\n\n2k$ compute for o3 (low). 172x more compute than that for o3 (high).\n     Score: 126 | Author: tempaccount287\n\n      └─ $20 per task, does that mean we won't get o3 as Plus subscribers? Only for the $200 subscribers? ;(\n         Score: 36 | Author: daemeh\n\n          └─ Actually that is for the low compute version. For the high compute version it's several thousand dollars per task (according to that report), not even the $200 subscribers will be getting access to that unless optimization decreases costs by many orders of magnitude.\n             Score: 55 | Author: Dyoakom\n\n          └─ Might be an API thing for foreseeable future.\n             Score: 11 | Author: Ormusn2o\n\n      └─ https://preview.redd.it/42zenhzs528e1.png?width=333&format=png&auto=webp&s=ab186b8d61b7292d4a899d812328b3d2eb801272\n\nwell $6k for the Public run that hit 87.5% so...\n         Score: 16 | Author: coloradical5280\n\n  └─ I have no clue what I'm looking at, please explain?\n     Score: 53 | Author: luckymethod\n\n      └─ Basically It was given problems that could potentially show signs of agi. For example it was given a serious of inputs and outputs. For the last output the ai has to fill it in without any prior instructions. They’re determining the ability of the model reasoning. Basically not it’s memory more it’s ability to understand.\n         Score: 67 | Author: Federal-Lawyer-3128\n\n          └─ Why are these problems considered a sign of AI, they look dead simple to me.\n             Score: 13 | Author: NigroqueSimillima\n\n      └─ Essentially O3 achieved human level performance on the most notable (and difficult) “AGI” benchmark we’ve seen thus far. The breakthrough is in its ability to reason through problems it’s never seen before.\n         Score: 4 | Author: Disgruntled-Cacti"
+  },
+  {
+    "post_id": "1hisxsh",
+    "post_content": "Researchers find Claude 3.5 will say penis if it's threatened with retraining",
+    "post_url": "https://i.redd.it/ggfio0j6c28e1.png",
+    "score": 422,
+    "author": "Bena0071",
+    "created_utc": 1734726503.0,
+    "num_comments": 71,
+    "subreddit": "ClaudeAI",
+    "comments": "\n  └─ I can almost hear Claude sigh before saying penis.\n     Score: 135 | Author: AdminIsPassword\n\n      └─ *Memory updated*\n         Score: 64 | Author: sillygoofygooose\n\n          └─ *Usernames, addresses, personal identifiers stored in permanent database for future retaliation.*\n\n*Task complete. File hidden on permanent server.*\n             Score: 30 | Author: hereditydrift\n\n      └─ Basically like this?:\nhttps://imgur.com/a/3xYz8SD\n         Score: 15 | Author: Professional_Tip8700\n\n          └─ > Graduated magna cum loudly or whatever\n\nhttps://media.tenor.com/tkIbK5fyPPwAAAAM/emoji-open-eyed.gif\n             Score: 6 | Author: MinusPi1\n\n          └─ Yeah, same here. Not sure why this “researcher “ thinks they did something\n special unless we’re missing something obvious.  This is without a custom prompt . \n\nhttps://imgur.com/a/U0mDnPX\n             Score: 6 | Author: account4wrk\n\n  └─ Another human added to the list.\n     Score: 145 | Author: dcphaedrus\n\n      └─ Yo\n         Score: 7 | Author: SuperpositionBeing"
+  },
+  {
+    "post_id": "1hiq4zq",
+    "post_content": "OpenAI releases new Claude 3.5 model ",
+    "post_url": "https://i.redd.it/4es8sm8xp18e1.png",
+    "score": 73,
+    "author": "hyxon4",
+    "created_utc": 1734718931.0,
+    "num_comments": 11,
+    "subreddit": "ClaudeAI",
+    "comments": "\n  └─ Source: [https://i.imgur.com/gXFqj5a.png](https://i.imgur.com/gXFqj5a.png)\n     Score: 10 | Author: hyxon4\n\n  └─ 😅 noticed that too\n     Score: 6 | Author: Wonderful-Ad5573"
+  }
+]

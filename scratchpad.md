@@ -2,7 +2,7 @@
 1. No keyword taken from user. Instead a category or topic of interest is chosen -> "AI"
 2. Top subreddits are manually chosen and stored.
 3. For each subreddit, top 20 posts are selected.
-4. For each post, top 2 comments are selected
+4. For each post, top 5 comments are selected
 5. Anywhere an external link or unknown keywords appear, use tavily to search
 6. Reconstructed Posts (RPs) are created by concatenating post_description + comments along with postIDs
 7. Topics Recommendation Agent suggests 2-4 posts to focus on
