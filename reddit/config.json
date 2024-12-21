@@ -4,10 +4,10 @@
         "ClaudeAI"
     ],
     "scraping": {
-        "posts_limit": 2,
-        "comments_limit": 2,
+        "posts_limit": 5,
+        "comments_limit": 5,
         "replies_limit": 2,
-        "comment_depth": 2,
+        "comment_depth": 5,
         "time_filter": "day"
     }
 }

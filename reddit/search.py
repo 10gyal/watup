@@ -165,7 +165,7 @@ def main():
             print(f"   Title: {subreddit['title']}")
             print(f"   Subscribers: {subreddit['subscribers']:,}")
             description = subreddit['public_description']
-            print(f"   Description: {description[:200] + '...' if len(description) > 200 else description}\n")
+            print(f"   Description: {description}\n")
             
             if args.show_posts:
                 posts = get_subreddit_posts(subreddit['display_name'], limit=5)
