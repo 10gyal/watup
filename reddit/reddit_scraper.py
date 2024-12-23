@@ -2,13 +2,14 @@ import json
 from typing import List, Dict, Any
 from auth import get_reddit_instance
 import praw
+from db import RedditDB
 
 class RedditScraper:
     """
     A class to scrape top posts and comments from specified subreddits.
     """
     
-    def __init__(self, config_file: str = 'reddit/config.json'):
+    def __init__(self, config_file: str = 'reddit/config.json', db_path: str = "reddit_data.db"):
         """
         Initialize the RedditScraper with path to the config JSON file.
         
@@ -20,6 +21,9 @@ class RedditScraper:
         self.reddit = get_reddit_instance()
         if not self.reddit:
             raise Exception("Failed to authenticate with Reddit")
+            
+        # Initialize database
+        self.db = RedditDB(db_path)
         
         # Load configuration
         try:
@@ -67,6 +71,7 @@ class RedditScraper:
             for post in subreddit.top(limit=limit, time_filter=self.config['time_filter']):
                 post_data = {
                     'id': post.id,
+                    'subreddit': subreddit_name,
                     'title': post.title,
                     'url': post.url,
                     'score': post.score,
@@ -154,6 +159,7 @@ class RedditScraper:
     def scrape_all_subreddits(self) -> Dict[str, List[Dict[str, Any]]]:
         """
         Scrape top posts and comments from all subreddits in the JSON file.
+        Saves results to both JSON file and database.
         Uses configuration values for limits.
         
         Returns:
@@ -162,9 +168,24 @@ class RedditScraper:
         subreddits = self.get_subreddits()
         results = {}
         
+        # Record the search in database
+        search_results = [{"name": subreddit} for subreddit in subreddits]
+        search_ids = self.db.record_search("all", search_results)
+        
+        # Map subreddits to their search IDs
+        subreddit_search_map = dict(zip(subreddits, search_ids))
+        
         for subreddit in subreddits:
             print(f"Scraping r/{subreddit}...")
             posts = self.get_top_posts(subreddit)
             results[subreddit] = posts
             
+            # Save posts to database
+            self.db.record_posts(subreddit_search_map[subreddit], posts)
+            
         return results
+        
+    def __del__(self):
+        """Cleanup database connection when object is destroyed."""
+        if hasattr(self, 'db'):
+            self.db.close()

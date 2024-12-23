@@ -1,3 +1,3 @@
-----------------------------------------------------------------------------------------------------
-Successfully authenticated with Reddit!
-Scraping r/OpenAI...
+This is what 34 seconds of “reasoning” get you from your 200 dollars a month subscription. (No access to o3 yet, so this is o1)
+(Credit to Tibor Blaho) 
+{'response': 'A **$200/month subscription** for an AI service yields only **34 seconds** of reasoning, highlighting limited capability. This feedback is credited to **Tibor Blaho**, and the user does not yet have access to **o3**, currently using **o1**.'}

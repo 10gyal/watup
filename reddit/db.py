@@ -32,9 +32,16 @@ class RedditDB:
             id TEXT PRIMARY KEY,
             post_id TEXT NOT NULL,
             subreddit_search_id TEXT NOT NULL,
-            created_at TIMESTAMP NOT NULL,
-            post_data JSON NOT NULL,
-            is_informative BOOLEAN NOT NULL DEFAULT FALSE,
+            subreddit TEXT NOT NULL,
+            title TEXT,
+            url TEXT,
+            score INTEGER,
+            created_utc REAL,
+            author TEXT,
+            num_comments INTEGER,
+            permalink TEXT,
+            selftext TEXT,
+            comments TEXT,
             FOREIGN KEY (subreddit_search_id) REFERENCES reddit_searches(id),
             UNIQUE(post_id, subreddit_search_id)
         )
@@ -84,26 +91,27 @@ class RedditDB:
         
         for post in posts:
             try:
-                # Get is_informative value, ensuring it's treated as a proper boolean
-                is_informative = post.get('is_informative')
-                print(f"DB: Received post {post['id']} with is_informative = {is_informative} (type: {type(is_informative)})")
-                
-                if not isinstance(is_informative, bool):
-                    print(f"DB: Converting non-boolean value to False for post {post['id']}")
-                    is_informative = False
-                
-                # Store complete post data
-                print(f"DB: Storing post {post['id']} with is_informative = {is_informative}")
                 cursor.execute('''
-                INSERT INTO subreddit_posts (id, post_id, subreddit_search_id, created_at, post_data, is_informative)
-                VALUES (?, ?, ?, ?, ?, ?)
+                INSERT INTO subreddit_posts (
+                    id, post_id, subreddit_search_id, subreddit, title, url,
+                    score, created_utc, author, num_comments,
+                    permalink, selftext, comments
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 ''', (
                     str(uuid.uuid4()),
                     post['id'],
                     subreddit_search_id,
-                    datetime.now().isoformat(),
-                    json.dumps(post),  # Store complete post data
-                    1 if is_informative else 0  # SQLite doesn't have a native boolean type
+                    post.get('subreddit', ''),
+                    post.get('title', ''),
+                    post.get('url', ''),
+                    post.get('score', 0),
+                    post.get('created_utc', 0.0),
+                    post.get('author', ''),
+                    post.get('num_comments', 0),
+                    post.get('permalink', ''),
+                    post.get('selftext', ''),
+                    json.dumps(post.get('comments', []))
                 ))
             except sqlite3.IntegrityError:
                 # Skip if this post already exists for this subreddit search
@@ -126,8 +134,8 @@ class RedditDB:
         cursor.execute('''
         SELECT 
             s.id, s.keyword, s.created_at, s.subreddit,
-            p.post_data,
-            p.is_informative
+            p.post_id, p.subreddit, p.title, p.url, p.score, p.created_utc,
+            p.author, p.num_comments, p.permalink, p.selftext, p.comments
         FROM reddit_searches s
         LEFT JOIN subreddit_posts p ON s.id = p.subreddit_search_id
         ORDER BY s.created_at DESC, p.created_at DESC
@@ -145,8 +153,19 @@ class RedditDB:
                     'posts': []
                 }
             if row[4]:  # If there are posts
-                post_data = json.loads(row[4])
-                post_data['is_informative'] = bool(row[5])  # Convert SQLite integer back to boolean
+                post_data = {
+                    'id': row[4],
+                    'subreddit': row[5],
+                    'title': row[6],
+                    'url': row[7],
+                    'score': row[8],
+                    'created_utc': row[9],
+                    'author': row[10],
+                    'num_comments': row[11],
+                    'permalink': row[12],
+                    'selftext': row[13],
+                    'comments': json.loads(row[14])
+                }
                 searches[search_id]['posts'].append(post_data)
         
         return list(searches.values())[:limit]

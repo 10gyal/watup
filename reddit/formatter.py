@@ -122,7 +122,7 @@ def format_json_data(results: Dict[str, List[Dict[str, Any]]]) -> List[Dict[str,
             # Create the formatted post entry
             formatted_post = {
                 'post_id': post['id'],
-                'post_content': post['selftext'] if post['selftext'] else post['title'],
+                'post_content': post['title'] + "\n" + (post['selftext'] if post['selftext'] else ""),
                 'post_url': post['url'],
                 'score': post['score'],
                 'author': post['author'],

@@ -2,49 +2,26 @@
 Recommend topics based on top posts + comments across subreddits
 """
 from pydantic import BaseModel, Field
-from typing import List, Dict, Any
+from typing import List
 from openai import OpenAI
-import json
+from .posts import Post, Posts, DailyPosts
+
 
 class Topics(BaseModel):
     theme: str = Field(..., title="Theme of the day")
-    post_id: List[str] = Field(..., title="list of related post_ids")
+    post_id: List[str] = Field(..., title="List of related post_ids")
     post_topics: List[str] = Field(..., title="Topics covered in the post")
 
-class Post:
-    def __init__(self, post: Dict[str, Any]):
-        self.post_id = post["post_id"]
-        self.content = post["post_content"]
-        self.comments = post["comments"]
-        self.subreddit = post["subreddit"]
-        self.score = post["score"]
-    
-    def stringify(self) -> str:
-        return f"Post: {self.post_id}\nContent: {self.content}\nComments: {self.comments}\nSubreddit: {self.subreddit}\nScore: {self.score}"
-    
-    def __repr__(self):
-        return self.stringify()
-
 class TopicRecommender:
-    def __init__(self, path):
-        self.path = path
+    def __init__(self, path: str = "/Users/tashi/Desktop/projects/whatsup/reddit_data.json"):
         self.client = OpenAI()
-
-    def gather_posts(self) -> str:
-        with open(self.path, "r") as file:
-            posts_data = json.load(file)
-        
-        posts = [Post(post) for post in posts_data]
-        print("*"*50)
-        print("Posts gathered: ", posts)
-        print("*"*50)
-        return "\n---\n".join(post.stringify() for post in posts)
+        self.path = path
     
-    def recommend_topics(self, num_topics: int = 5) -> List[str]:
+    def recommend_topics(self):
         """
         Analyze posts and recommend trending topics
         """
-        posts_text = self.gather_posts()
+        posts_text = DailyPosts(self.path).gather_posts()
         
         system_message = f"""
         You are a summarizer AI designed to integrate important discussion topics (and only important) across a Reddit subreddit about AI for **a technical, detail oriented engineer audience**.
