@@ -1,16 +1,41 @@
 [
   {
-    "theme": "Uncanny Valley in AI-Generated Media: Veo's Breakthroughs",
+    "theme": "Veo and Sora: Innovations in AI-Generated Films",
     "post_ids": [
       "1hkiqxo"
     ],
-    "post_summary": "**Veo 2** produced a short movie that has received positive feedback for its quality. The user is interested in finding comparable **short films from Sora** for a potential comparison."
+    "post_summary": "**Veo 2** released a short movie that received high praise, described as *crazy good*. The author expresses interest in finding comparable short films from **Sora** for a potential comparison."
   },
   {
-    "theme": "Uncanny Valley in AI-Generated Media: Veo's Breakthroughs",
+    "theme": "AI IQ Evaluation: Graph Controversy and Real Implications",
     "post_ids": [
-      "1hkiqxo"
+      "1hkxsel"
     ],
-    "post_summary": "**Veo 2** produced an impressive short movie that gained positive reception. The author expresses interest in finding similar short films from **Sora** for a comparative analysis."
+    "post_summary": "The estimated **IQ** of **o3** is **157**, suggesting a high level of intelligence."
+  },
+  {
+    "theme": "Competitive Landscape of AI Models: Sonnet, o1, and Gemini 2.0 Flash",
+    "post_ids": [
+      "1hkved3",
+      "1hkuaki",
+      "1hkrs6j",
+      "1hkvq0u"
+    ],
+    "post_summary": "In comparison of **Gemini 2.0 Flash**, **OpenAI o1**, and **Claude 3.5 Sonnet**, the new Gemini model shows strong performance but **Claude 3.5 Sonnet** continues to excel in coding tasks, while **o1** leads in complex reasoning and mathematics. Despite the hype around newer models, many users believe Sonnet outperforms them in versatile tasks, maintaining its status as a top choice for practical applications, as echoed by various developers in the community."
+  },
+  {
+    "theme": "Limitations as Catalysts: User Experiences with Claude and Gemini Models",
+    "post_ids": [
+      "1hkp6bp",
+      "1hkzdzs"
+    ],
+    "post_summary": "**Limitations** can inspire creativity, as one user shares their experience with a free alternative to **Claude's Pro Plan**, finding it effective due to its **unrestricted thread continuity** and **exceptional** responses compared to Claude's limited project knowledge capabilities. Another user notes that after significant use, **Claude** has started to exhibit a distinct **personality**, marking a positive development in its conversational AI performance."
+  },
+  {
+    "theme": "Yann LeCun on AGI: A Perspective on Current Progress",
+    "post_ids": [
+      "1hkvq0u"
+    ],
+    "post_summary": "**Yann LeCun** asserts that the current discourse around achieving **AGI** (Artificial General Intelligence) may mislead people into thinking it's imminent, stating, *\"we're actually very far from it.\"* He clarifies that while it is not a matter of centuries, it will still require **several years** to get closer to that goal."
   }
 ]

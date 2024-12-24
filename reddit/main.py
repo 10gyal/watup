@@ -1,3 +1,4 @@
+from .utils import load_config
 from .reddit_scraper import RedditScraper
 from .formatter import (
     format_reddit_data,
@@ -6,31 +7,66 @@ from .formatter import (
     save_json_to_file
 )
 from .topic_rec import TopicRecommender
+from .post_summarizer import PostSummarizer
+from .comment_summarizer import CommentSummarizer
 
 def main():
     """
     Main function to demonstrate usage of the RedditScraper class
     and formatting utilities.
     """
+    # Load configuration
+    config = load_config()
+    paths = config["paths"]
+    
     # Initialize and run the scraper
     scraper = RedditScraper()
     results = scraper.scrape_all_subreddits()
     
     # Save formatted text data
     formatted_data = format_reddit_data(results, scraper.api_requests)
-    save_to_file(formatted_data, 'reddit_data.txt')
+    save_to_file(formatted_data, paths["reddit_data_txt"])
     
     # Save JSON data
     json_data = format_json_data(results)
-    path_file = 'reddit_data.json'
-    save_json_to_file(json_data, path_file)
+    save_json_to_file(json_data, paths["reddit_data_json"])
     
     # Get topic recommendations
-    topic_recommender = TopicRecommender(path_file)
+    topic_recommender = TopicRecommender(paths["reddit_data_json"])
     topics = topic_recommender.recommend_topics()
     
     # Save topic recommendations
-    save_json_to_file(topics, 'topic_recommendations.json')
+    save_json_to_file(topics, paths["topic_recommendations"])
+    
+    # Generate post summaries for each theme
+    post_summarizer = PostSummarizer(
+        content_path=paths["reddit_data_json"],
+        theme_path=paths["topic_recommendations"]
+    )
+    
+    # Clear existing theme summaries to avoid duplicates
+    import os
+    if os.path.exists(paths["theme_summaries"]):
+        os.remove(paths["theme_summaries"])
+    
+    # Generate summaries for all themes
+    themes = topics.get("themes", [])
+    print(f"Processing {len(themes)} themes...")
+    for theme_index in range(len(themes)):
+        try:
+            theme = themes[theme_index]
+            print(f"Summarizing theme {theme_index + 1}/{len(themes)}: {theme['theme']}")
+            post_summarizer.summarize_theme_posts(theme_index)
+        except Exception as e:
+            print(f"Error summarizing theme {theme_index}: {str(e)}")
+            continue
+            
+    # Generate comment summaries for each theme
+    comment_summarizer = CommentSummarizer(
+        summaries_path=paths["theme_summaries"],
+        output_path=paths["comment_summaries"]
+    )
+    comment_summarizer.summarize_comments()
 
 if __name__ == "__main__":
     main()

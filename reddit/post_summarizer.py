@@ -4,7 +4,7 @@ Summarize Reddit posts based on themes
 from pydantic import BaseModel, Field
 from typing import List, Dict, Any
 from openai import OpenAI
-from .utils import DailyPosts, Posts, Post, TopicRecommendations
+from .utils import DailyPosts, Posts, Post, TopicRecommendations, load_config
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -23,11 +23,13 @@ class PostSummarizer:
     focusing on technical details and key points for an engineer audience.
     """
     def __init__(self, 
-                 content_path: str = "/Users/tashi/Desktop/projects/whatsup/reddit_data.json",
-                 theme_path: str = "/Users/tashi/Desktop/projects/whatsup/topic_recommendations.json"):
+                 content_path: str = None,
+                 theme_path: str = None):
+        config = load_config()
         self.client = OpenAI()
-        self.content_path = content_path
-        self.theme_path = theme_path
+        self.content_path = content_path or config["paths"]["reddit_data_json"]
+        self.theme_path = theme_path or config["paths"]["topic_recommendations"]
+        self.model = config["summarizer"]["post"]["model"]
         self.system_message = """
 You are a summarizer AI designed to integrate important discussion topics (and only important) across a Reddit subreddit about AI for **a technical, detail oriented engineer audience**. 
     
@@ -93,7 +95,7 @@ Summaries should be succinct (2 sentences each), and should include any relevant
             
             # Generate summary
             response = self.client.beta.chat.completions.parse(
-                model="gpt-4o-mini",
+                model=self.model,
                 messages=[
                     {"role": "system", "content": self.system_message},
                     {"role": "user", "content": post_contents},
@@ -117,7 +119,7 @@ Summaries should be succinct (2 sentences each), and should include any relevant
             print(f"Error summarizing posts: {str(e)}")
             raise
             
-    def save_summary_to_json(self, summary_data: Dict[str, Any], output_path: str = "theme_summaries.json") -> None:
+    def save_summary_to_json(self, summary_data: Dict[str, Any], output_path: str = None) -> None:
         """
         Save the theme summary data to a JSON file.
         
@@ -129,23 +131,30 @@ Summaries should be succinct (2 sentences each), and should include any relevant
         import os
         
         try:
+            config = load_config()
+            final_path = output_path or config["paths"]["theme_summaries"]
+            
             # Load existing summaries if file exists
             existing_summaries = []
-            if os.path.exists(output_path):
-                with open(output_path, 'r') as f:
+            if os.path.exists(final_path):
+                with open(final_path, 'r') as f:
                     existing_summaries = json.load(f)
-                    
-            # Add new summary
-            existing_summaries.append(summary_data)
+            
+            # Update or add new summary
+            theme_exists = False
+            for i, summary in enumerate(existing_summaries):
+                if summary['theme'] == summary_data['theme']:
+                    existing_summaries[i] = summary_data
+                    theme_exists = True
+                    break
+            
+            if not theme_exists:
+                existing_summaries.append(summary_data)
             
             # Save updated summaries
-            with open(output_path, 'w') as f:
+            with open(final_path, 'w') as f:
                 json.dump(existing_summaries, indent=2, ensure_ascii=False, fp=f)
                 
         except Exception as e:
             print(f"Error saving summary to JSON: {str(e)}")
             raise
-
-if __name__ == "__main__":
-    summarizer = PostSummarizer()
-    summary = summarizer.summarize_theme_posts(2)

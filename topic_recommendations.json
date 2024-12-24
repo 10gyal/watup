@@ -1,41 +1,37 @@
 {
   "themes": [
     {
-      "theme": "Gemini 2.0 Flash versus Sonnet 3.5 Coding Dominance",
-      "post_ids": [
-        "1hkved3",
-        "1hkh3cf",
-        "1hkr1l2"
-      ]
-    },
-    {
-      "theme": "LLM Improvements and Benchmarks: O1 versus Claude 3.5",
-      "post_ids": [
-        "1hkuaki",
-        "1hkxsel",
-        "1hkfmvd"
-      ]
-    },
-    {
-      "theme": "Uncanny Valley in AI-Generated Media: Veo's Breakthroughs",
+      "theme": "Veo and Sora: Innovations in AI-Generated Films",
       "post_ids": [
         "1hkiqxo"
       ]
     },
     {
-      "theme": "Open Source Models: Llama-3 1-Nemotron 51B and Tooling Updates",
+      "theme": "AI IQ Evaluation: Graph Controversy and Real Implications",
       "post_ids": [
-        "1hkfmvd",
-        "1hkievg",
-        "1hkey48"
+        "1hkxsel"
       ]
     },
     {
-      "theme": "Personalization and Custom Configurations in AI Assistants",
+      "theme": "Competitive Landscape of AI Models: Sonnet, o1, and Gemini 2.0 Flash",
       "post_ids": [
-        "1hkzdzs",
+        "1hkved3",
+        "1hkuaki",
+        "1hkrs6j",
+        "1hkvq0u"
+      ]
+    },
+    {
+      "theme": "Limitations as Catalysts: User Experiences with Claude and Gemini Models",
+      "post_ids": [
         "1hkp6bp",
-        "1hkh3cf"
+        "1hkzdzs"
+      ]
+    },
+    {
+      "theme": "Yann LeCun on AGI: A Perspective on Current Progress",
+      "post_ids": [
+        "1hkvq0u"
       ]
     }
   ]

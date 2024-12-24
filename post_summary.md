@@ -1,1 +1,0 @@
-**Veo 2** has released a **short movie** that received high praise, described as *crazy good*. The author is interested in finding comparable short films from **Sora** for a comparison and mentions that **o3's** estimated **IQ** is **157**.

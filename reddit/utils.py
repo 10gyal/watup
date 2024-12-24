@@ -3,6 +3,13 @@ Post, Posts, and TopicRecommendations classes for handling Reddit data
 """
 from typing import Dict, Any, List
 import json
+import os
+
+def load_config() -> Dict[str, Any]:
+    """Load configuration from config.json"""
+    config_path = os.path.join(os.path.dirname(__file__), 'config.json')
+    with open(config_path, 'r') as f:
+        return json.load(f)
 
 class Post:
     def __init__(self, post: Dict[str, Any]):

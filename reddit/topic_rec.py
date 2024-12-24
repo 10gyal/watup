@@ -4,7 +4,7 @@ Recommend topics based on top posts + comments across subreddits
 from pydantic import BaseModel, Field
 from typing import List
 from openai import OpenAI
-from .posts import Post, Posts, DailyPosts
+from .utils import Post, Posts, DailyPosts
 
 class Theme(BaseModel):
     theme: str = Field(..., description="Recommended theme for the day")
