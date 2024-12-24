@@ -8,8 +8,8 @@
     "scraping": {
         "posts_limit": 5,
         "comments_limit": 5,
-        "replies_limit": 5,
-        "comment_depth": 5,
+        "replies_limit": 2,
+        "comment_depth": 2,
         "time_filter": "day"
     }
 }

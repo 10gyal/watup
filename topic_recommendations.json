@@ -1,17 +1,42 @@
 {
-  "theme": "O3 Release Sparks Debate on AI Progress and Potential",
-  "post_id": [
-    "1hk5dv1",
-    "1hjzzhz",
-    "1hkievg",
-    "1hk6kv0",
-    "1hjz5ub"
-  ],
-  "post_topics": [
-    "Reactions to OpenAI O3 release",
-    "Discussions on implications for AI development",
-    "Concerns about job displacement",
-    "Future of AI models and capabilities",
-    "Model evaluation and performance in complex tasks"
+  "themes": [
+    {
+      "theme": "Gemini 2.0 Flash versus Sonnet 3.5 Coding Dominance",
+      "post_ids": [
+        "1hkved3",
+        "1hkh3cf",
+        "1hkr1l2"
+      ]
+    },
+    {
+      "theme": "LLM Improvements and Benchmarks: O1 versus Claude 3.5",
+      "post_ids": [
+        "1hkuaki",
+        "1hkxsel",
+        "1hkfmvd"
+      ]
+    },
+    {
+      "theme": "Uncanny Valley in AI-Generated Media: Veo's Breakthroughs",
+      "post_ids": [
+        "1hkiqxo"
+      ]
+    },
+    {
+      "theme": "Open Source Models: Llama-3 1-Nemotron 51B and Tooling Updates",
+      "post_ids": [
+        "1hkfmvd",
+        "1hkievg",
+        "1hkey48"
+      ]
+    },
+    {
+      "theme": "Personalization and Custom Configurations in AI Assistants",
+      "post_ids": [
+        "1hkzdzs",
+        "1hkp6bp",
+        "1hkh3cf"
+      ]
+    }
   ]
 }

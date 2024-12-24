@@ -1,5 +1,5 @@
 """
-Post and Posts classes for handling Reddit post data
+Post, Posts, and TopicRecommendations classes for handling Reddit data
 """
 from typing import Dict, Any, List
 import json
@@ -41,3 +41,26 @@ class DailyPosts(Posts):
     def gather_posts(self) -> str:
         """Get posts as a formatted string with separators"""
         return "\n---\n".join(post.stringify() for post in self.posts)
+
+class TopicRecommendations:
+    def __init__(self, path: str):
+        self.path = path
+        self.themes: List[Dict[str, Any]] = []
+        self._load_themes()
+    
+    def _load_themes(self):
+        """Load themes from the JSON file"""
+        with open(self.path, "r") as file:
+            data = json.load(file)
+            self.themes = data["themes"]
+    
+    def get_themes(self) -> List[Dict[str, Any]]:
+        """Get list of theme dictionaries"""
+        return self.themes
+    
+    def get_post_ids_for_theme(self, theme: str) -> List[str]:
+        """Get post IDs for a specific theme"""
+        for theme_data in self.themes:
+            if theme_data["theme"] == theme:
+                return theme_data["post_ids"]
+        return []

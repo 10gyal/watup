@@ -1,11 +1,11 @@
-from reddit_scraper import RedditScraper
-from formatter import (
+from .reddit_scraper import RedditScraper
+from .formatter import (
     format_reddit_data,
     format_json_data,
     save_to_file,
     save_json_to_file
 )
-from topic_rec import TopicRecommender
+from .topic_rec import TopicRecommender
 
 def main():
     """

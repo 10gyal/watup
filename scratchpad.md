@@ -73,4 +73,8 @@ You are going to summarize comments responding to the specific post that you wil
         
 USE ACTIVE VOICE, NOT PASSIVE VOICE. Resist bland corporate language like "underscore" and "leverage" and "fostering innovation", and significantly reduce usage of words like in the following list.
 
-Do not introduce anything, simply list the top items that you have chosen.```
+Do not introduce anything, simply list the top items that you have chosen.
+```
+
+### What is needed
+- Headlines: 

@@ -1,8 +1,8 @@
 import json
 from typing import List, Dict, Any
-from auth import get_reddit_instance
+from .auth import get_reddit_instance
 import praw
-from db import RedditDB
+from .db import RedditDB
 
 class RedditScraper:
     """

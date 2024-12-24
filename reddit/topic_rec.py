@@ -6,11 +6,12 @@ from typing import List
 from openai import OpenAI
 from .posts import Post, Posts, DailyPosts
 
+class Theme(BaseModel):
+    theme: str = Field(..., description="Recommended theme for the day")
+    post_ids: List[str] = Field(..., description="Post IDs of the posts related to the theme")
 
 class Topics(BaseModel):
-    theme: str = Field(..., title="Theme of the day")
-    post_id: List[str] = Field(..., title="List of related post_ids")
-    post_topics: List[str] = Field(..., title="Topics covered in the post")
+    themes: List[Theme] = Field(..., description="4-5 top recommended themes for the day")
 
 class TopicRecommender:
     def __init__(self, path: str = "/Users/tashi/Desktop/projects/whatsup/reddit_data.json"):

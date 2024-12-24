@@ -1,3 +1,15 @@
-This is what 34 seconds of “reasoning” get you from your 200 dollars a month subscription. (No access to o3 yet, so this is o1)
-(Credit to Tibor Blaho) 
-{'response': 'A **$200/month subscription** for an AI service yields only **34 seconds** of reasoning, highlighting limited capability. This feedback is credited to **Tibor Blaho**, and the user does not yet have access to **o3**, currently using **o1**.'}
+----------------------------------------------------------------------------------------------------
+Successfully authenticated with Reddit!
+Processing theme: Uncanny Valley in AI-Generated Media: Veo's Breakthroughs
+Processing theme: Uncanny Valley in AI-Generated Media: Veo's Breakthroughs
+
+================================================================================
+Uncanny Valley in AI-Generated Media: Veo's Breakthroughs
+================================================================================
+
+Post Summary:
+**Veo 2** produced an impressive short movie that gained positive reception. The author expresses interest in finding similar short films from **Sora** for a comparative analysis.
+
+- Users noted that while **Veo 2** shows impressive movement and character consistency, it still struggles with the **uncanny valley** effect, especially in scenes where human characters display visible glitches and inconsistencies, such as changing clothing and awkward movements. 
+- Some commenters advocated for improvements in AI-generated content, suggesting a need for **stability** in video output rather than more intricate details, pointing out the frenetic pacing and lack of believable physical interactions in existing models. 
+- Discussions mentioned **Google's** significant investment in infrastructure for AI projects, with some predicting that innovative AI models like those from **Veo** will disrupt traditional Hollywood filmmaking within the next decade, emphasizing a potential shift in consumer preferences toward AI-generated content over human-created art.
