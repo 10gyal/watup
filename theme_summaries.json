@@ -1,35 +1,39 @@
 [
   {
-    "theme": "QVQ-72B: A Game Changer in Vision AI",
+    "theme": "Michael Saylor's Bitcoin Strategy: From Skepticism to Major Holdings",
     "post_ids": [
-      "1hlhtm0",
-      "1hln7zr",
-      "1hli5dn"
+      "1hlkkqa",
+      "1hl8rgq"
     ],
-    "post_summary": "**QVQ-72B**, part of the **Qwen** series, exhibits substantial intelligence, capable of performing complex tasks effectively. For more detailed insights, one can refer to the **Qwen/QVQ-72B Preview** on [Hugging Face](https://huggingface.co) which outlines its functionalities."
+    "post_summary": "**Michael Saylor** of **MicroStrategy** has dramatically changed his stance on **Bitcoin**, now owning **444,262 BTC** valued at **$27.7 billion**, a stark contrast to his previous comparison of Bitcoin to online gambling made **11 years ago**. Additionally, **Sam Bankman-Fried** from **FTX** may be under consideration for a **presidential pardon**, stirring discussions in the finance and investment community."
   },
   {
-    "theme": "Benchmarking QVQ-72B Against Established Models",
+    "theme": "FTX Fallout: Potential Presidential Pardon for Sam Bankman-Fried",
     "post_ids": [
-      "1hljmv1",
-      "1hlhtm0"
+      "1hl8rgq",
+      "1hl9nkx"
     ],
-    "post_summary": "**QVQ** announces the release of the **new Qwen model**. While specific details about the model's features or improvements were not provided, the excitement surrounding its launch indicates significant interest in the updates."
+    "post_summary": "**Sam Bankman-Fried**, the founder of **FTX**, is reportedly under consideration for a **presidential pardon**, reflecting ongoing dialogues around his legal challenges. Additionally, **Russia has implemented a six-year ban on crypto mining across ten regions**, marking a significant regulatory shift in the country's approach to cryptocurrency."
   },
   {
-    "theme": "Molmo: The Underrated Open-Source Vision Model",
+    "theme": "Cardano's Development Challenges and Community Divisions",
     "post_ids": [
-      "1hldtx0",
-      "1hlhtm0"
+      "1hlgvrb"
     ],
-    "post_summary": "The **challenge** involves using any AI model to accurately count the number of digits in a given number. In a related discussion, there is mention of **QVQ**, a **new Qwen release**, but no further details about the release or its implications were provided."
+    "post_summary": "**Charles Hoskinson**, founder of **Cardano**, engaged in a debate with an AI bot regarding blockchain technology. The conversation highlighted differing opinions on **decentralization** and the potential future of smart contracts."
   },
   {
-    "theme": "Challenges in AI Counting Mechanisms",
+    "theme": "Russia's Ban on Crypto Mining: Implications for Energy Management",
     "post_ids": [
-      "1hljmv1",
-      "1hldtx0"
+      "1hl9nkx"
     ],
-    "post_summary": "**Challenge:** A user proposes to get any AI model, whether **open** or **closed**, to accurately count the number of digits in a given input."
+    "post_summary": "**Russia** has imposed a **6-year ban** on **crypto mining** across **10 regions**, impacting local operations and potentially altering the digital asset landscape. This decision aligns with broader regulatory efforts and reflects concerns over energy consumption and environmental impact."
+  },
+  {
+    "theme": "The Bitcoin Nostalgia: Lessons From Early Adopters and Missed Opportunities",
+    "post_ids": [
+      "1hlq3wc"
+    ],
+    "post_summary": "The post references an asset that, based on current valuation metrics, would be valued at **$167 million**. This hints at significant appreciation but does not provide specific details about the asset or its previous valuation."
   }
 ]

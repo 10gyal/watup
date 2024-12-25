@@ -9,7 +9,7 @@ from .prompts.topic_recommender_prompt import SYSTEM_MESSAGE
 
 class Theme(BaseModel):
     theme: str = Field(..., description="Recommended theme for the day")
-    post_ids: List[str] = Field(..., description="Post IDs of the posts related to the theme")
+    post_id: str = Field(..., description="Post ID of the post related to the theme")
 
 class Topics(BaseModel):
     themes: List[Theme] = Field(..., description="4-5 top recommended themes for the day")

@@ -1,32 +1,35 @@
 {
   "themes": [
     {
-      "theme": "QVQ-72B: A Game Changer in Vision AI",
+      "theme": "Michael Saylor's Bitcoin Strategy: From Skepticism to Major Holdings",
       "post_ids": [
-        "1hlhtm0",
-        "1hln7zr",
-        "1hli5dn"
+        "1hlkkqa",
+        "1hl8rgq"
       ]
     },
     {
-      "theme": "Benchmarking QVQ-72B Against Established Models",
+      "theme": "FTX Fallout: Potential Presidential Pardon for Sam Bankman-Fried",
       "post_ids": [
-        "1hljmv1",
-        "1hlhtm0"
+        "1hl8rgq",
+        "1hl9nkx"
       ]
     },
     {
-      "theme": "Molmo: The Underrated Open-Source Vision Model",
+      "theme": "Cardano's Development Challenges and Community Divisions",
       "post_ids": [
-        "1hldtx0",
-        "1hlhtm0"
+        "1hlgvrb"
       ]
     },
     {
-      "theme": "Challenges in AI Counting Mechanisms",
+      "theme": "Russia's Ban on Crypto Mining: Implications for Energy Management",
       "post_ids": [
-        "1hljmv1",
-        "1hldtx0"
+        "1hl9nkx"
+      ]
+    },
+    {
+      "theme": "The Bitcoin Nostalgia: Lessons From Early Adopters and Missed Opportunities",
+      "post_ids": [
+        "1hlq3wc"
       ]
     }
   ]

@@ -120,7 +120,7 @@ class CommentSummarizer:
                 }
         
         # Generate summaries for each theme
-        final_summaries = {}
+        final_summaries = []
         for theme_name, data in theme_summaries.items():
             concat_comments = data["post_summary"] + "\n\nComments:\n"
             for post_id, comments in data["comments"].items():
@@ -138,10 +138,12 @@ class CommentSummarizer:
                 )
                 response = response.choices[0].message.parsed.model_dump()
                 
-                final_summaries[theme_name] = {
+                final_summary = {
+                    "theme": theme_name,
                     "post_summary": data["post_summary"],
                     "comment_summary": response["comment_summary"]
                 }
+                final_summaries.append(final_summary)
             except Exception as e:
                 print(f"Error generating summary for theme {theme_name}: {str(e)}")
                 continue
