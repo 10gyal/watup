@@ -1,37 +1,32 @@
 {
   "themes": [
     {
-      "theme": "Veo and Sora: Innovations in AI-Generated Films",
+      "theme": "QVQ-72B: A Game Changer in Vision AI",
       "post_ids": [
-        "1hkiqxo"
+        "1hlhtm0",
+        "1hln7zr",
+        "1hli5dn"
       ]
     },
     {
-      "theme": "AI IQ Evaluation: Graph Controversy and Real Implications",
+      "theme": "Benchmarking QVQ-72B Against Established Models",
       "post_ids": [
-        "1hkxsel"
+        "1hljmv1",
+        "1hlhtm0"
       ]
     },
     {
-      "theme": "Competitive Landscape of AI Models: Sonnet, o1, and Gemini 2.0 Flash",
+      "theme": "Molmo: The Underrated Open-Source Vision Model",
       "post_ids": [
-        "1hkved3",
-        "1hkuaki",
-        "1hkrs6j",
-        "1hkvq0u"
+        "1hldtx0",
+        "1hlhtm0"
       ]
     },
     {
-      "theme": "Limitations as Catalysts: User Experiences with Claude and Gemini Models",
+      "theme": "Challenges in AI Counting Mechanisms",
       "post_ids": [
-        "1hkp6bp",
-        "1hkzdzs"
-      ]
-    },
-    {
-      "theme": "Yann LeCun on AGI: A Perspective on Current Progress",
-      "post_ids": [
-        "1hkvq0u"
+        "1hljmv1",
+        "1hldtx0"
       ]
     }
   ]

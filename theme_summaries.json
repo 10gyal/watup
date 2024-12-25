@@ -1,41 +1,35 @@
 [
   {
-    "theme": "Veo and Sora: Innovations in AI-Generated Films",
+    "theme": "QVQ-72B: A Game Changer in Vision AI",
     "post_ids": [
-      "1hkiqxo"
+      "1hlhtm0",
+      "1hln7zr",
+      "1hli5dn"
     ],
-    "post_summary": "**Veo 2** released a short movie that received high praise, described as *crazy good*. The author expresses interest in finding comparable short films from **Sora** for a potential comparison."
+    "post_summary": "**QVQ-72B**, part of the **Qwen** series, exhibits substantial intelligence, capable of performing complex tasks effectively. For more detailed insights, one can refer to the **Qwen/QVQ-72B Preview** on [Hugging Face](https://huggingface.co) which outlines its functionalities."
   },
   {
-    "theme": "AI IQ Evaluation: Graph Controversy and Real Implications",
+    "theme": "Benchmarking QVQ-72B Against Established Models",
     "post_ids": [
-      "1hkxsel"
+      "1hljmv1",
+      "1hlhtm0"
     ],
-    "post_summary": "The estimated **IQ** of **o3** is **157**, suggesting a high level of intelligence."
+    "post_summary": "**QVQ** announces the release of the **new Qwen model**. While specific details about the model's features or improvements were not provided, the excitement surrounding its launch indicates significant interest in the updates."
   },
   {
-    "theme": "Competitive Landscape of AI Models: Sonnet, o1, and Gemini 2.0 Flash",
+    "theme": "Molmo: The Underrated Open-Source Vision Model",
     "post_ids": [
-      "1hkved3",
-      "1hkuaki",
-      "1hkrs6j",
-      "1hkvq0u"
+      "1hldtx0",
+      "1hlhtm0"
     ],
-    "post_summary": "In comparison of **Gemini 2.0 Flash**, **OpenAI o1**, and **Claude 3.5 Sonnet**, the new Gemini model shows strong performance but **Claude 3.5 Sonnet** continues to excel in coding tasks, while **o1** leads in complex reasoning and mathematics. Despite the hype around newer models, many users believe Sonnet outperforms them in versatile tasks, maintaining its status as a top choice for practical applications, as echoed by various developers in the community."
+    "post_summary": "The **challenge** involves using any AI model to accurately count the number of digits in a given number. In a related discussion, there is mention of **QVQ**, a **new Qwen release**, but no further details about the release or its implications were provided."
   },
   {
-    "theme": "Limitations as Catalysts: User Experiences with Claude and Gemini Models",
+    "theme": "Challenges in AI Counting Mechanisms",
     "post_ids": [
-      "1hkp6bp",
-      "1hkzdzs"
+      "1hljmv1",
+      "1hldtx0"
     ],
-    "post_summary": "**Limitations** can inspire creativity, as one user shares their experience with a free alternative to **Claude's Pro Plan**, finding it effective due to its **unrestricted thread continuity** and **exceptional** responses compared to Claude's limited project knowledge capabilities. Another user notes that after significant use, **Claude** has started to exhibit a distinct **personality**, marking a positive development in its conversational AI performance."
-  },
-  {
-    "theme": "Yann LeCun on AGI: A Perspective on Current Progress",
-    "post_ids": [
-      "1hkvq0u"
-    ],
-    "post_summary": "**Yann LeCun** asserts that the current discourse around achieving **AGI** (Artificial General Intelligence) may mislead people into thinking it's imminent, stating, *\"we're actually very far from it.\"* He clarifies that while it is not a matter of centuries, it will still require **several years** to get closer to that goal."
+    "post_summary": "**Challenge:** A user proposes to get any AI model, whether **open** or **closed**, to accurately count the number of digits in a given input."
   }
 ]

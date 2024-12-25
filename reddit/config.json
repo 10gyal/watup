@@ -1,13 +1,13 @@
 {
     "subreddits": [
-        "OpenAI",
-        "ClaudeAI"
+        "LocalLlama"
+
     ],
     "scraping": {
         "posts_limit": 5,
-        "comments_limit": 5,
-        "replies_limit": 2,
-        "comment_depth": 2,
+        "comments_limit": 20,
+        "replies_limit": 10,
+        "comment_depth": 10,
         "time_filter": "day"
     },
     "paths": {

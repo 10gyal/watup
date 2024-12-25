@@ -8,6 +8,8 @@ from pydantic import BaseModel, Field
 from openai import OpenAI
 from .auth import get_reddit_instance
 from .utils import load_config
+from .prompts.comment_summarizer_prompt import SYSTEM_MESSAGE
+
 
 class CommentSummary(BaseModel):
     comment_summary: str = Field(..., description="Summary of the comment discussion")
@@ -29,26 +31,7 @@ class CommentSummarizer:
         self.model = config["summarizer"]["comment"]["model"]
         self.max_comments = config["summarizer"]["comment"]["max_comments_per_post"]
         self.max_replies = config["summarizer"]["comment"]["max_replies_per_comment"]
-        self.system_message = """
-You are a summarizer AI designed to integrate important discussion topics (and only important) across a Reddit subreddit about AI for **a technical, detail oriented engineer audience**. 
-
-Your task is to create a unified summary that captures key points, conversations, and references without being channel-specific. Focus on thematic coherence and group similar discussion points, even if they are from different posts.
-
-You will be given a post summary followed by its comments. First, present the post summary as provided. Then, create a 3 bullet point summary of the comment discussion, formatted in markdown by bolding notable names, terms, facts, dates, and numbers. Comment summaries should be succinct (2 sentences each), and should include any relevant info with specific numbers, key names and links/urls discussed (do not hallucinate your own quotes or links). If none were given, just don't say anything. If insufficient context was provided, omit it from the summary. Use markdown syntax to format links, preferably [link title](https://link.url), and format in **bold** the key words and key headlines, and *italicize* direct quotes.
-
-<example>
-- The **Tone Changer** tool is fully local and compatible with any **OpenAI API**. It's available 
-  on [GitHub](https://github.com/rooben-me/tone-changer-open) and can be accessed via a 
-  [Vercel-hosted demo](https://open-tone-changer.vercel.app/).
-- Users expressed interest in the project's implementation/ asking for **README updates** with running 
-  instructions and inquiring about the **demo creation process**. The developer used **screen.studio** 
-  for screen recording.
-</example>
-        
-USE ACTIVE VOICE, NOT PASSIVE VOICE. Resist bland corporate language like "underscore" and "leverage" and "fostering innovation", and significantly reduce usage of words like in the following list.
-
-Do not introduce anything, simply list the top items that you have chosen.
-"""
+        self.system_message = SYSTEM_MESSAGE
 
     def get_comments_for_post(self, reddit: praw.Reddit, post_id: str, max_comments: int = None) -> List[str]:
         """

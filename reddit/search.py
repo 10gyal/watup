@@ -4,7 +4,7 @@ import json
 from typing import List, Dict, Optional
 from auth import get_reddit_instance
 from db import RedditDB
-from posts import get_subreddit_posts, format_post_for_display
+from reddit.utils import get_subreddit_posts, format_post_for_display
 from post_filter_agent import get_informative_posts
 
 def load_subreddits_from_file(file_path: str) -> Optional[List[Dict[str, str]]]:
