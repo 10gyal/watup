@@ -1,21 +1,29 @@
 {
+    "user_profile":{
+        "who_am_i": "A blockchain developer",
+        "field_of_interest": "blockchain technology, smart contracts, decentralized applications, and cryptocurrencies",
+        "intent": "technical learning"
+    },
     "subreddits": [
-        "LocalLLaMA"
-
+        "BlockchainStartups",
+        "CryptoCurrency",
+        "ethereum",
+        "blockchaindeveloper"
     ],
     "scraping": {
-        "posts_limit": 4,
+        "posts_limit": 2,
         "comments_limit": 2,
         "replies_limit": 2,
         "comment_depth": 1,
-        "time_filter": "day"
+        "time_filter": "week"
     },
     "paths": {
         "reddit_data_json": "reddit_data.json",
         "reddit_data_txt": "reddit_data.txt",
         "topic_recommendations": "topic_recommendations.json",
         "theme_summaries": "theme_summaries.json",
-        "comment_summaries": "comment_summaries.json"
+        "comment_summaries": "comment_summaries.json",
+        "generated_prompts": "./reddit/prompts/generated"
     },
     "summarizer": {
         "post": {
@@ -27,5 +35,6 @@
             "max_comments_per_post": 2,
             "max_replies_per_comment": 2
         }
-    }
+    },
+    "default_model": "gpt-4o-mini"
 }

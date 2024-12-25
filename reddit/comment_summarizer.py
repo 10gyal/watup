@@ -1,6 +1,7 @@
 """
 Module for summarizing comments from Reddit posts grouped by themes
 """
+import os
 from typing import Dict, List, Optional
 import praw
 import json
@@ -8,7 +9,6 @@ from pydantic import BaseModel, Field
 from openai import OpenAI
 from .auth import get_reddit_instance
 from .utils import load_config
-from .prompts.comment_summarizer_prompt import SYSTEM_MESSAGE
 
 
 class CommentSummary(BaseModel):
@@ -31,7 +31,9 @@ class CommentSummarizer:
         self.model = config["summarizer"]["comment"]["model"]
         self.max_comments = config["summarizer"]["comment"]["max_comments_per_post"]
         self.max_replies = config["summarizer"]["comment"]["max_replies_per_comment"]
-        self.system_message = SYSTEM_MESSAGE
+        prompt_path = os.path.join(config["paths"]["generated_prompts"], "comment_summarizer_prompt.txt")
+        with open(prompt_path, 'r') as f:
+            self.system_message = f.read()
 
     def get_comments_for_post(self, reddit: praw.Reddit, post_id: str, max_comments: int = None) -> List[str]:
         """

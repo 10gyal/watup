@@ -65,9 +65,9 @@ class TopicRecommendations:
         """Get list of theme dictionaries"""
         return self.themes
     
-    def get_post_ids_for_theme(self, theme: str) -> List[str]:
+    def get_post_id_for_theme(self, theme: str) -> List[str]:
         """Get post IDs for a specific theme"""
         for theme_data in self.themes:
             if theme_data["theme"] == theme:
-                return theme_data["post_ids"]
+                return theme_data["post_id"]
         return []

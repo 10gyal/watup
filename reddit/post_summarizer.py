@@ -1,12 +1,12 @@
 """
 Summarize Reddit posts based on themes
 """
+import os
 from pydantic import BaseModel, Field
 from typing import List, Dict, Any
 from openai import OpenAI
 from .utils import DailyPosts, Posts, Post, TopicRecommendations, load_config
 from dotenv import load_dotenv
-from .prompts.post_summarizer_prompt import SYSTEM_MESSAGE
 
 load_dotenv()
 
@@ -31,7 +31,9 @@ class PostSummarizer:
         self.content_path = content_path or config["paths"]["reddit_data_json"]
         self.theme_path = theme_path or config["paths"]["topic_recommendations"]
         self.model = config["summarizer"]["post"]["model"]
-        self.system_message = SYSTEM_MESSAGE
+        prompt_path = os.path.join(config["paths"]["generated_prompts"], "post_summarizer_prompt.txt")
+        with open(prompt_path, 'r') as f:
+            self.system_message = f.read()
     
     def summarize_theme_posts(self, theme_index: int = 0) -> Dict[str, Any]:
         """
