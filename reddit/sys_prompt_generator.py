@@ -1,12 +1,15 @@
 import os
+import json
 from openai import OpenAI
 from .utils import load_config
 from pydantic import BaseModel, Field
 from typing import List, Optional
+from dotenv import load_dotenv
 
+load_dotenv()
 
 class SystemPrompt(BaseModel):
-    system_prompt: str = Field(..., description="The system prompt that corresponds to the user profile.")
+    response: str = Field(..., description="System prompt containing user profile, task description, example, and remarks")
 
 class SystemPromptGenerator:
     """
@@ -17,8 +20,15 @@ class SystemPromptGenerator:
         self.client = OpenAI()
         self.model = config["default_model"]
         self.prompt_example = prompt_example
-        self.user_profile = config["user_profile"]
         self.save_path = save_path or config["paths"].get("generated_prompts")
+        
+        # Load user profile from JSON
+        try:
+            with open('user_profile.json', 'r') as f:
+                self.user_profile_data = json.load(f)
+
+        except FileNotFoundError:
+            raise FileNotFoundError("user_profile.json not found. Please run create_user_profile.py first.")
     
     def _save_prompt(self, prompt: str, filename: str) -> None:
         """
@@ -41,9 +51,9 @@ class SystemPromptGenerator:
         """
         Generate a system prompt for the Reddit summarizer.
         """
-        system_message = "You are an expert prompt engineer tasked with creating a system prompt for a Reddit summarizer AI. Your task is to generate a system prompt that guides the AI in summarizing Reddit posts and comments. The system prompt should provide clear instructions on how to summarize posts and comments in a coherent and informative manner. Use the following example as a reference when creating the system prompt:"
+        system_message = "You are an expert prompt engineer tasked with creating a system prompt from the given example. Your task is to generate a system prompt that aligns well with the user profile or target audience and therefore the user profile must be clearly mentioned in the system prompt. The system prompt should provide clear descriptions on who the target audience is, what the task is, what are some examples and additional remarks if given in the example. Use the following example as a reference when creating the system prompt for the given user:"
 
-        user_message = f"Given the user profile: {self.user_profile}, generate a system prompt similar to the one below: {self.prompt_example}"
+        user_message = f"Given the user profile: {self.user_profile_data}, generate a system prompt that follows the template below: {self.prompt_example}"
 
         response = self.client.beta.chat.completions.parse(
                 model=self.model,
@@ -55,7 +65,7 @@ class SystemPromptGenerator:
             )
         
         response = response.choices[0].message.parsed.model_dump()
-        response = response["system_prompt"]
+        response = response["response"]
 
         if save_as:
             self._save_prompt(response, save_as)

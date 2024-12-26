@@ -46,7 +46,7 @@ class PostSummarizer:
             Dictionary containing the theme, post IDs, and summary with format:
             {
                 'theme': str,  # The theme name
-                'post_ids': List[str],  # List of post IDs in this theme
+                'post_id': List[str],  # Just one single post ID for now
                 'summary': str  # The generated summary text
             }
             
@@ -67,7 +67,7 @@ class PostSummarizer:
             # Gather post contents for the theme
             theme = themes[theme_index]
             post_contents = ""
-            for post_id in theme["post_ids"]:
+            for post_id in theme["post_id"]:
                 if post_id in all_posts:
                     post = all_posts[post_id]
                     post_contents += f"[Post ID: {post.post_id}]\n{post.content}\n\n"
@@ -90,7 +90,7 @@ class PostSummarizer:
 
             result = {
                 'theme': theme['theme'],
-                'post_ids': theme['post_ids'],
+                'post_id': theme['post_id'],
                 'post_summary': response
             }
             

@@ -81,7 +81,7 @@ class CommentSummarizer:
             Dictionary mapping post IDs to their comments
         """
         theme_comments = {}
-        for post_id in theme["post_ids"]:
+        for post_id in theme["post_id"]:
             comments = self.get_comments_for_post(reddit, post_id)
             if comments:
                 theme_comments[post_id] = comments

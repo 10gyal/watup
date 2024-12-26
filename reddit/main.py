@@ -1,6 +1,7 @@
 from .utils import load_config
 from .reddit_scraper import RedditScraper
 from .sys_prompt_generator import SystemPromptGenerator
+from .create_user_profile import UserProfile
 from .prompts.examples.topic_recommender_prompt import SYSTEM_MESSAGE as TOPIC_RECOMMENDER_MESSAGE
 from .prompts.examples.post_summarizer_prompt import SYSTEM_MESSAGE as POST_SUMMARIZER_MESSAGE
 from .prompts.examples.comment_summarizer_prompt import SYSTEM_MESSAGE as COMMENT_SUMMARIZER_MESSAGE
@@ -27,7 +28,13 @@ def main():
     config = load_config()
     paths = config["paths"]
     
-    # Generate system prompts
+    # Generate and save user profile
+    user_profile = UserProfile(**config["user_profile"])
+    profile = user_profile.generate_profile()
+    user_profile.save_to_json(profile)
+    print("User profile generated and saved to user_profile.json")
+    
+    # Generate system prompts using the saved profile
     topic_generator = SystemPromptGenerator(TOPIC_RECOMMENDER_MESSAGE)
     post_generator = SystemPromptGenerator(POST_SUMMARIZER_MESSAGE)
     comment_generator = SystemPromptGenerator(COMMENT_SUMMARIZER_MESSAGE)
@@ -86,6 +93,8 @@ def main():
 
     # Convert JSON to markdown
     json_to_markdown()
+
+    print("Markdown created. Process completed successfully!")
         
     end = time.time()
     print(f"Execution time: {end - start:.2f} seconds")

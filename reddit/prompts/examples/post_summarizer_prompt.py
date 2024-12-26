@@ -23,11 +23,11 @@ Summaries should be succinct (2 sentences each), and should include any relevant
     Weighing, Picture, Architect, Adventure, Journey, Embark, Navigate, Navigation
     ### overused list ###
 </style>
-""
+"""
 
 
 
-# SYSTEM_MESSAGE = """
+## SYSTEM_MESSAGE = """
 # You are a summarizer AI designed to integrate important discussion topics (and only important) across a Reddit subreddit about AI for **a finance/investor audience well-versed in the industry**.
 
 # Your task is to create a unified summary that captures key points, conversations, and references without being channel-specific. **Focus on thematic coherence** and group similar discussion points, even if they are from different posts.

@@ -1,37 +1,30 @@
 [
   {
-    "theme": "Transformative Tools: Maximizing LLM Efficiency with Claude",
-    "post_ids": [
-      "1hhzb94"
+    "theme": "Heightened Use of AI in Resume Parsing and ATS Optimization",
+    "post_id": [
+      "1hdd2us"
     ],
-    "post_summary": "**Claude** significantly enhances productivity for consultants by streamlining audit preparation, allowing users to compress three days of work into one. By leveraging Claude's project features, professionals can upload client research, access past references, and produce high-quality content efficiently, resulting in outputs that feel significantly more expensive than actual cost. Additional capabilities include generating **diagrams** and **wireframes**, live document editing in **Google Docs**, and freeing up time for customer service and lead generation activities."
+    "post_summary": "Employers increasingly favor **visual resume formats** that enhance readability and engagement, as indicated by resources from **Canva**. This trend highlights the significance of **design elements** in effectively showcasing qualifications to prospective employers."
   },
   {
-    "theme": "Comparative Analysis: Evaluating AI Models and Performance Benchmarks",
-    "post_ids": [
-      "1hkrs6j"
+    "theme": "Age Discrimination Trends and Resume Strategies",
+    "post_id": [
+      "1hgm0vv"
     ],
-    "post_summary": "The author expresses strong support for **Sonnet**, comparing it favorably to **OpenAI's new o3 model** and emphasizing its versatility across various tasks such as creative writing, coding, and image understanding. They argue that while o models are specialized and resource-intensive, Sonnet’s broad applicability and competitive benchmark performance reaffirm its architecture and training efficacy. They speculate that **Anthropic**'s upcoming reasoning model, possibly named **Opus**, will further elevate the standard, suggesting it might outperform existing o models. Overall, they advocate for Sonnet's status as one of the best language models for practical use."
+    "post_summary": "An individual, aged **56**, faced challenges in job applications despite **28 years** of experience in **advertising/web development**. After changing their resume introduction from \"over 28 years of experience\" to \"18+ years of experience\"—the length of their last job—they received two recruiter calls in just a few days, illustrating that **age discrimination** may impact hiring practices."
   },
   {
-    "theme": "The Dramatic Decline in AI and Robotics Pricing: What's Next?",
-    "post_ids": [
-      "1hludfm"
+    "theme": "Innovative Job-Seeking Strategies for Overqualified Candidates",
+    "post_id": [
+      "1h2elir"
     ],
-    "post_summary": "The author shares a collection of **popular prompts** for **ChatGPT**, highlighting their utility in personal exploration and development. Key prompts include **Unlock Your Mind 2.0**, which combines **NLP**, psychology, and affirmations; a cinematic experience to inspire reflection for the new year; and **Echowriting**, designed for **voice and tone cloning**. Each prompt includes links for deeper exploration, encouraging community interaction and feedback."
+    "post_summary": "**Job seekers** express frustration over being ghosted by recruiters and facing rejections despite being **overqualified**. The pressure of securing a position leads some to consider **lying on resumes** due to desperation and feelings of inadequacy."
   },
   {
-    "theme": "Real-World Applications: Using AI for Productivity and Learning",
-    "post_ids": [
-      "1hjuzbz"
+    "theme": "The Shift Towards Non-Traditional Career Paths",
+    "post_id": [
+      "1h6saw3"
     ],
-    "post_summary": "An impact analysis system was developed featuring a **precision prompt** to assess the ripple effects of decisions by mapping **direct**, **secondary**, **side**, **tertiary**, and **hidden impacts**, along with potential **long-term results**. The approach emphasizes detailed prompts, **probability weighting**, and evidence quality assessment (High/Medium/Low), facilitating comprehensive evaluations of actions such as adopting new technologies or organizational changes. The analysis framework ensures clarity in cause-effect relationships, ethical considerations, and identifies possible conflicting evidence or alternative viewpoints."
-  },
-  {
-    "theme": "Exploring Hardware Requirements: Building Powerful AI Workstations",
-    "post_ids": [
-      "1hi24k9"
-    ],
-    "post_summary": "A home server build is highlighted featuring **14 NVIDIA RTX 3090** GPUs, indicating a significant investment aimed at high-performance computing tasks, such as deep learning and rendering. The rig emphasizes considerations for **power consumption**, **cooling solutions**, and **case modifications** necessary to accommodate multiple GPUs efficiently. The build showcases the potential of parallel processing capabilities offered by such a configuration, targeting enthusiasts and professionals requiring extensive computational resources."
+    "post_summary": "A user reflects on leaving a **$100k job** for a position as a **game warden** that offers **50% less pay**, prioritizing **happiness** over money. They highlight **$4k in passive income**, minimal debt, and a supportive wife who plans to return to work as their children enter school, while seeking validation about their decision from the online community."
   }
 ]
