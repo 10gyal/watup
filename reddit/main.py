@@ -13,12 +13,16 @@ from .formatter import (
 from .topic_rec import TopicRecommender
 from .post_summarizer import PostSummarizer
 from .comment_summarizer import CommentSummarizer
+import time
+import os
+
 
 def main():
     """
     Main function to demonstrate usage of the RedditScraper class
     and formatting utilities.
     """
+    start = time.time()
     # Load configuration
     config = load_config()
     paths = config["paths"]
@@ -58,7 +62,6 @@ def main():
     )
     
     # Clear existing theme summaries to avoid duplicates
-    import os
     if os.path.exists(paths["theme_summaries"]):
         os.remove(paths["theme_summaries"])
     
@@ -80,6 +83,9 @@ def main():
         output_path=paths["comment_summaries"]
     )
     comment_summarizer.summarize_comments()
+        
+    end = time.time()
+    print(f"Execution time: {end - start:.2f} seconds")
 
 if __name__ == "__main__":
     main()
