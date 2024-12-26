@@ -9,7 +9,7 @@ from .utils import Post, Posts, DailyPosts, load_config
 
 class Theme(BaseModel):
     theme: str = Field(..., description="Recommended theme for the day")
-    post_ids: List[str] = Field(..., description="List containing the post_id of the single most relevant post for the theme")
+    post_ids: str = Field(..., description="The post_id of the single most relevant post for the theme")
 
 class Topics(BaseModel):
     themes: List[Theme] = Field(..., description="4-5 top recommended themes for the day")
@@ -40,4 +40,8 @@ class TopicRecommender:
 
         response = response.choices[0].message.parsed
         response = response.model_dump()
+        
+        for theme in response["themes"]:
+            theme["post_ids"] = [theme["post_ids"]]
+
         return response

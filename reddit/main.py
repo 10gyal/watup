@@ -15,7 +15,7 @@ from .post_summarizer import PostSummarizer
 from .comment_summarizer import CommentSummarizer
 import time
 import os
-
+from .to_md import json_to_markdown
 
 def main():
     """
@@ -83,6 +83,9 @@ def main():
         output_path=paths["comment_summaries"]
     )
     comment_summarizer.summarize_comments()
+
+    # Convert JSON to markdown
+    json_to_markdown()
         
     end = time.time()
     print(f"Execution time: {end - start:.2f} seconds")
