@@ -1,183 +1,125 @@
 import praw
 import argparse
 import json
-from typing import List, Dict, Optional
-from auth import get_reddit_instance
-from db import RedditDB
-from reddit.utils import get_subreddit_posts, format_post_for_display
-from post_filter_agent import get_informative_posts
+from typing import List, Dict, Optional, Tuple
+from .auth import get_reddit_instance
+from .utils import load_config
+from openai import OpenAI
+from pydantic import BaseModel, Field
 
-def load_subreddits_from_file(file_path: str) -> Optional[List[Dict[str, str]]]:
+class SubredditResult(BaseModel):
+    name: str
+    description: str
+    subscribers: int
+    relevance_score: float
+
+class KeywordsResponse(BaseModel):
+    query_keywords: List[str] = Field(..., description="List of keywords to search for relevant subreddits.")
+
+
+def get_query_keywords() -> List[str]:
+    """Get keywords based on user profile to search for relevant subreddits."""
+    user_profile = load_config()["user_profile"]
+    client = OpenAI()
+
+    response = client.beta.chat.completions.parse(
+        model="gpt-4o-mini",
+        messages=[
+            {"role": "system", "content": "You are a Reddit expert. Your task is to generate a list of keywords to search for relevant subreddits. You will be given a user profile and asked to generate a list of keywords based on the user's interests and intent."},
+            {"role": "user", "content": str(user_profile)},
+        ],
+        response_format=KeywordsResponse,
+    )
+    
+    response = response.choices[0].message.parsed.model_dump()
+    return response["query_keywords"]
+
+def search_subreddit(reddit: praw.Reddit, keyword: str) -> List[SubredditResult]:
     """
-    Load subreddit information from a JSON file.
+    Search for subreddits using a keyword and return relevant results.
     
     Args:
-        file_path (str): Path to the JSON file containing subreddit names
+        reddit: Authenticated Reddit instance
+        keyword: Keyword to search for
         
     Returns:
-        Optional[List[Dict[str, str]]]: List of dictionaries containing subreddit information,
-                                      or None if loading/authentication fails
+        List of SubredditResult objects containing relevant subreddits
     """
-    reddit = get_reddit_instance()
-    if not reddit:
-        print("Failed to authenticate with Reddit. Please check your credentials.")
-        return None
-    
+    results = []
     try:
-        with open(file_path, 'r') as f:
-            subreddit_names = json.load(f)
-        
-        if not isinstance(subreddit_names, list):
-            print("Error: JSON file must contain a list of subreddit names")
-            return None
-            
-        subreddits = []
-        for name in subreddit_names:
-            try:
-                subreddit = reddit.subreddit(name)
-                # Store complete subreddit data
-                subreddit_data = {
-                    'display_name': subreddit.display_name,
-                    'title': subreddit.title,
-                    'subscribers': subreddit.subscribers,
-                    'public_description': subreddit.public_description,
-                    'created_utc': subreddit.created_utc,
-                    'over18': subreddit.over18,
-                    'subscribers': subreddit.subscribers,
-                    'subreddit_type': subreddit.subreddit_type,
-                    'url': subreddit.url,
-                    'active_user_count': getattr(subreddit, 'active_user_count', None)
-                }
-                subreddits.append(subreddit_data)
-            except Exception as e:
-                print(f"Error loading subreddit {name}: {str(e)}")
-                continue
+        # Search for subreddits using the keyword
+        for subreddit in reddit.subreddits.search(keyword, limit=5):
+            # Calculate a simple relevance score based on subscriber count and keyword presence
+            relevance_score = min(subreddit.subscribers / 1000000, 1.0)  # Normalize by 1M subscribers
+            if keyword.lower() in subreddit.display_name.lower():
+                relevance_score += 0.3
+            if keyword.lower() in (subreddit.public_description or "").lower():
+                relevance_score += 0.2
                 
-        return subreddits
+            results.append(SubredditResult(
+                name=subreddit.display_name,
+                description=subreddit.public_description or "No description available",
+                subscribers=subreddit.subscribers,
+                relevance_score=round(relevance_score, 2)
+            ))
     except Exception as e:
-        print(f"Error loading subreddits from file: {str(e)}")
-        return None
+        print(f"Error searching for subreddit with keyword '{keyword}': {str(e)}")
+    
+    # Sort by relevance score
+    return sorted(results, key=lambda x: x.relevance_score, reverse=True)
 
-def search_subreddits(keyword: str, limit: int = 5, save_to_db: bool = True) -> Optional[List[Dict[str, str]]]:
+def get_popular_subreddits(keywords: Optional[List[str]] = None) -> Dict[str, List[SubredditResult]]:
     """
-    Search for subreddits matching the given keyword and return top results.
+    Get popular subreddits based on provided keywords or user profile.
     
     Args:
-        keyword (str): Search term to find relevant subreddits
-        limit (int): Number of results to return (default: 5)
+        keywords: Optional list of keywords to search for. If None, gets keywords from user profile.
         
     Returns:
-        Optional[List[Dict[str, str]]]: List of dictionaries containing subreddit information,
-                                      or None if authentication fails
+        Dictionary mapping keywords to lists of relevant subreddits
     """
+    # Get Reddit instance
     reddit = get_reddit_instance()
     if not reddit:
-        print("Failed to authenticate with Reddit. Please check your credentials.")
-        return None
-    
-    # Search for subreddits
-    subreddits = []
-    try:
-        for subreddit in reddit.subreddits.search(keyword, limit=limit):
-            # Store complete subreddit data
-            subreddit_data = {
-                'display_name': subreddit.display_name,
-                'title': subreddit.title,
-                'subscribers': subreddit.subscribers,
-                'public_description': subreddit.public_description,
-                'created_utc': subreddit.created_utc,
-                'over18': subreddit.over18,
-                'subscribers': subreddit.subscribers,
-                'subreddit_type': subreddit.subreddit_type,
-                'url': subreddit.url,
-                'active_user_count': getattr(subreddit, 'active_user_count', None)
-            }
-            subreddits.append(subreddit_data)
-            
-        # Save results and fetch posts if requested
-        if save_to_db and subreddits:
-            try:
-                db = RedditDB()
-                search_ids = db.record_search(keyword, subreddits)
-                
-                # Fetch and store top posts for each subreddit
-                print("\nFetching top posts from each subreddit...")
-                for subreddit, search_id in zip(subreddits, search_ids):
-                    print(f"\nFetching posts from r/{subreddit['display_name']}...")
-                    posts = get_subreddit_posts(subreddit['display_name'], limit=5)
-                    if posts:
-                        # Analyze posts for informativeness
-                        processed_posts = get_informative_posts(posts)
-                        db.record_posts(search_id, processed_posts)
-                    
-                db.close()
-            except Exception as e:
-                print(f"Error saving to database: {str(e)}")
+        print("Failed to authenticate with Reddit")
+        return {}
         
-        return subreddits
-    except Exception as e:
-        print(f"Error searching subreddits: {str(e)}")
-        return None
-
-def main():
-    # Set up argument parser
-    parser = argparse.ArgumentParser(description='Find or load subreddits and their posts')
-    group = parser.add_mutually_exclusive_group(required=True)
-    group.add_argument('--keyword', help='Keyword to search for subreddits')
-    group.add_argument('--file', help='JSON file containing list of subreddit names')
-    parser.add_argument('--limit', type=int, default=2, help='Number of search results to return (default: 2)')
-    parser.add_argument('--no-save', action='store_true', help='Do not save results to database')
-    parser.add_argument('--show-posts', action='store_true', help='Show posts from each subreddit')
+    # Get keywords if not provided
+    if keywords is None:
+        keywords = get_query_keywords()
     
-    # Parse arguments
-    args = parser.parse_args()
-    
-    # Get subreddits either through search or from file
-    if args.keyword:
-        results = search_subreddits(args.keyword, args.limit, not args.no_save)
-    else:
-        results = load_subreddits_from_file(args.file)
-        if results and not args.no_save:
-            # Save the manually loaded subreddits
-            try:
-                db = RedditDB()
-                search_ids = db.record_search("manual_load", results)
-                
-                # Fetch and store top posts for each subreddit
-                print("\nFetching top posts from each subreddit...")
-                for subreddit, search_id in zip(results, search_ids):
-                    print(f"\nFetching posts from r/{subreddit['display_name']}...")
-                    posts = get_subreddit_posts(subreddit['display_name'], limit=20)
-                    if posts:
-                        # Analyze posts for informativeness
-                        processed_posts = get_informative_posts(posts)
-                        db.record_posts(search_id, processed_posts)
-                    
-                db.close()
-            except Exception as e:
-                print(f"Error saving to database: {str(e)}")
-    
-    if results:
-        # Print results
-        print(f"\nTop {len(results)} subreddits for '{args.keyword}':\n")
-        for i, subreddit in enumerate(results, 1):
-            print(f"{i}. r/{subreddit['display_name']}")
-            print(f"   Title: {subreddit['title']}")
-            print(f"   Subscribers: {subreddit['subscribers']:,}")
-            description = subreddit['public_description']
-            print(f"   Description: {description}\n")
+    # Search for subreddits for each keyword
+    results = {}
+    for keyword in keywords:
+        subreddits = search_subreddit(reddit, keyword)
+        if subreddits:
+            results[keyword] = subreddits
             
-            if args.show_posts:
-                posts = get_subreddit_posts(subreddit['display_name'], limit=5)
-                if posts:
-                    # Analyze posts for informativeness before displaying
-                    posts = get_informative_posts(posts)
-                    print("   Top posts from the last 24 hours:")
-                    for post in posts:
-                        print("\n   " + "-"*76)
-                        print("   " + format_post_for_display(post).replace("\n", "\n   "))
-    else:
-        print("\nNo results found or an error occurred.")
+    return results
 
-if __name__ == '__main__':
-    main()
+def format_subreddit_results(results: Dict[str, List[SubredditResult]]) -> str:
+    """
+    Format subreddit search results into a readable string.
+    
+    Args:
+        results: Dictionary of keyword to subreddit results
+        
+    Returns:
+        Formatted string of results
+    """
+    output = []
+    for keyword, subreddits in results.items():
+        output.append(f"\nResults for keyword: {keyword}")
+        output.append("-" * 80)
+        
+        for sr in subreddits:
+            output.append(f"\nr/{sr.name} ({sr.subscribers:,} subscribers)")
+            output.append(f"Relevance Score: {sr.relevance_score}")
+            output.append(f"Description: {sr.description[:200]}...")
+            
+    return "\n".join(output)
+
+if __name__ == "__main__":
+    # Example usage
+    results = get_popular_subreddits()
+    print(format_subreddit_results(results))
