@@ -10,6 +10,7 @@ from .utils import Post, Posts, DailyPosts, load_config
 class Theme(BaseModel):
     theme: str = Field(..., description="Recommended theme for the day")
     post_id: str = Field(..., description="The post_id of the single most relevant post for the theme")
+    url: str = Field(..., description="The URL of the most relevant post for the theme")
 
 class Topics(BaseModel):
     themes: List[Theme] = Field(..., description="4-5 top recommended themes for the day")
@@ -41,7 +42,13 @@ class TopicRecommender:
         response = response.choices[0].message.parsed
         response = response.model_dump()
         
+        # Load posts to get URLs
+        posts = DailyPosts(self.path).get_posts()
+        post_urls = {post.post_id: post.url for post in posts}
+        
         for theme in response["themes"]:
-            theme["post_id"] = [theme["post_id"]]
+            post_id = theme["post_id"]
+            theme["post_id"] = [post_id]  # Convert to list format
+            theme["url"] = post_urls[post_id]  # Add URL for the post
 
         return response

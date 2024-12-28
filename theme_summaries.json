@@ -1,30 +1,42 @@
 [
   {
-    "theme": "Heightened Use of AI in Resume Parsing and ATS Optimization",
+    "theme": "OpenAI's Shift to For-Profit Model and Funding Requirements",
     "post_id": [
-      "1hdd2us"
+      "1hnf7mt"
     ],
-    "post_summary": "Employers increasingly favor **visual resume formats** that enhance readability and engagement, as indicated by resources from **Canva**. This trend highlights the significance of **design elements** in effectively showcasing qualifications to prospective employers."
+    "post_url": "https://www.cnbc.com/2024/12/27/openai-needs-more-capital-than-wed-imagined-moves-to-for-profit.html",
+    "post_summary": "OpenAI reveals it requires **$7 trillion** in capital to execute its **for-profit plan**, indicating a significant increase in funding needs beyond previous expectations. This announcement emphasizes the growing financial demands associated with the development of advanced AI technologies."
   },
   {
-    "theme": "Age Discrimination Trends and Resume Strategies",
+    "theme": "Innovations in Reinforcement Learning for LLM Alignment: Introduction of REINFORCE++",
     "post_id": [
-      "1hgm0vv"
+      "1hna801"
     ],
-    "post_summary": "An individual, aged **56**, faced challenges in job applications despite **28 years** of experience in **advertising/web development**. After changing their resume introduction from \"over 28 years of experience\" to \"18+ years of experience\"—the length of their last job—they received two recruiter calls in just a few days, illustrating that **age discrimination** may impact hiring practices."
+    "post_url": "https://www.reddit.com/r/MachineLearning/comments/1hna801/p_reinforce_a_simple_and_efficient_approach_for/",
+    "post_summary": "**REINFORCE++** integrates optimization techniques from **Proximal Policy Optimization (PPO)** into the **REINFORCE algorithm**, aiming to enhance performance and stability in **Reinforcement Learning from Human Feedback (RLHF)** while decreasing computational demands without a critic network. This new methodology demonstrates greater stability than **GRPO** and faster performance than **PPO**, with detailed technical information available in the reports [here](https://hijkzzz.notion.site/reinforce-plus-plus) and [here](https://github.com/hijkzzz/Awesome-LLM-Strawberry/blob/main/resources/REINFORCE%2B%2B.pdf)."
   },
   {
-    "theme": "Innovative Job-Seeking Strategies for Overqualified Candidates",
+    "theme": "Quantum Teleportation Over Existing Internet Cables Achieved",
     "post_id": [
-      "1h2elir"
+      "1hnhmpm"
     ],
-    "post_summary": "**Job seekers** express frustration over being ghosted by recruiters and facing rejections despite being **overqualified**. The pressure of securing a position leads some to consider **lying on resumes** due to desperation and feelings of inadequacy."
+    "post_url": "https://www.reddit.com/r/singularity/comments/1hnhmpm/quantum_teleportation_achieved_over_existing/",
+    "post_summary": "**Northwestern University engineers** achieved **quantum teleportation** over existing internet infrastructure, marking a significant development in quantum communication technology. This breakthrough has the potential to enhance secure data transmission without the limitations of traditional latency, addressing concerns in current internet architectures; more details can be found in the [full article](https://thequantuminsider.com/2024/12/27/northwestern-engineers-achieve-quantum-teleportation-over-existing-internet-cable/)."
   },
   {
-    "theme": "The Shift Towards Non-Traditional Career Paths",
+    "theme": "Transformer Limitations and Circuit Complexity Trade-offs Discussed",
     "post_id": [
-      "1h6saw3"
+      "1hnnl6s"
     ],
-    "post_summary": "A user reflects on leaving a **$100k job** for a position as a **game warden** that offers **50% less pay**, prioritizing **happiness** over money. They highlight **$4k in passive income**, minimal debt, and a supportive wife who plans to return to work as their children enter school, while seeking validation about their decision from the online community."
+    "post_url": "https://www.reddit.com/r/MachineLearning/comments/1hnnl6s/d_the_parallelism_tradeoff_understanding/",
+    "post_summary": "**Will Merrill** examines **transformers** through the lens of **circuit complexity**, positioning them within the **TC^0 complexity class**—a domain that struggles with inherently sequential tasks. He argues that the **expressive limits** of transformers arise from their **parallelism**, and while incorporating **chain of thought (CoT)** strategies can enhance performance, it inherently compromises **parallelism and training efficiency**; he emphasizes the importance of considering this tradeoff in future architecture designs."
+  },
+  {
+    "theme": "Claude 3.5 Sonnet's New Tool for Visualizing Codebases Instantly",
+    "post_id": [
+      "1hnejza"
+    ],
+    "post_url": "https://v.redd.it/pxd1exhs4e9e1",
+    "post_summary": "**Claude 3.5 Sonnet** offers functionality to transform any codebase into an **interactive diagram** through the tool **GitDiagram**. This capability allows developers to instantly visualize complex code structures, enhancing understanding and maintenance."
   }
 ]

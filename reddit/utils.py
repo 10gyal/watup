@@ -15,12 +15,13 @@ class Post:
     def __init__(self, post: Dict[str, Any]):
         self.post_id = post["post_id"]
         self.content = post["post_content"]
+        self.url = post["post_url"]
         self.comments = post["comments"]
         self.subreddit = post["subreddit"]
         self.score = post["score"]
     
     def stringify(self) -> str:
-        return f"Post: {self.post_id}\nContent: {self.content}\nComments: {self.comments}\nSubreddit: {self.subreddit}\nScore: {self.score}"
+        return f"Post: {self.post_id}\nURL: {self.url}\nContent: {self.content}\nComments: {self.comments}\nSubreddit: {self.subreddit}\nScore: {self.score}"
     
     def __repr__(self):
         return self.stringify()

@@ -5,17 +5,20 @@
         "intent": "I'm looking to stay updated on the latest trends in AI, product optimization, user experience, resume building, job market landscape, and AI transforming HR processes. I'm also interested in learning about the challenges faced by job seekers and how AI can help them overcome these challenges. I'm also interested in learning if there are any new tools or features that I can integrate into Rezi.ai to improve the user experience and help job seekers create better resumes."
     },
     "subreddits": [
-        "Resumes",
-        "GetEmployed",
-        "JobSearchHacks",
-        "careerguidance"
+        "LocalLLaMA",
+        "artificial",
+        "singularity",
+        "ClaudeAI",
+        "OpenAI",
+        "MachineLearning",
+        "ChatGPT"
     ],
     "scraping": {
-        "posts_limit": 4,
-        "comments_limit": 5,
-        "replies_limit": 3,
-        "comment_depth": 3,
-        "time_filter": "month"
+        "posts_limit": 2,
+        "comments_limit": 1,
+        "replies_limit": 1,
+        "comment_depth": 1,
+        "time_filter": "day"
     },
     "paths": {
         "reddit_data_json": "reddit_data.json",
@@ -23,7 +26,7 @@
         "topic_recommendations": "topic_recommendations.json",
         "theme_summaries": "theme_summaries.json",
         "comment_summaries": "comment_summaries.json",
-        "generated_prompts": "./reddit/prompts/generated"
+        "generated_prompts": "./reddit/prompts/examples"
     },
     "summarizer": {
         "post": {

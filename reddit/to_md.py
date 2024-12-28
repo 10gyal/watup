@@ -21,7 +21,7 @@ def json_to_markdown():
     
     for entry in data:
         # Add theme as header
-        markdown_content += f"## {entry['theme']}\n\n"
+        markdown_content += f"## [{entry['theme']}]({entry['post_url']})\n\n"
         
         # Add post summary
         markdown_content += f"{entry['post_summary']}\n\n"

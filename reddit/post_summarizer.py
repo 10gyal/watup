@@ -91,6 +91,7 @@ class PostSummarizer:
             result = {
                 'theme': theme['theme'],
                 'post_id': theme['post_id'],
+                'post_url': theme['url'],
                 'post_summary': response
             }
             

@@ -117,6 +117,7 @@ class CommentSummarizer:
             theme_comments = self.get_theme_comments(reddit, theme)
             if theme_comments:
                 theme_summaries[theme_name] = {
+                    "post_url": theme["post_url"],
                     "post_summary": theme["post_summary"],
                     "comments": theme_comments
                 }
@@ -142,6 +143,7 @@ class CommentSummarizer:
                 
                 final_summary = {
                     "theme": theme_name,
+                    "post_url": data["post_url"],
                     "post_summary": data["post_summary"],
                     "comment_summary": response["comment_summary"]
                 }

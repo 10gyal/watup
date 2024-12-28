@@ -1,28 +1,39 @@
 {
   "themes": [
     {
-      "theme": "Heightened Use of AI in Resume Parsing and ATS Optimization",
+      "theme": "OpenAI's Shift to For-Profit Model and Funding Requirements",
       "post_id": [
-        "1hdd2us"
-      ]
+        "1hnf7mt"
+      ],
+      "url": "https://www.cnbc.com/2024/12/27/openai-needs-more-capital-than-wed-imagined-moves-to-for-profit.html"
     },
     {
-      "theme": "Age Discrimination Trends and Resume Strategies",
+      "theme": "Innovations in Reinforcement Learning for LLM Alignment: Introduction of REINFORCE++",
       "post_id": [
-        "1hgm0vv"
-      ]
+        "1hna801"
+      ],
+      "url": "https://www.reddit.com/r/MachineLearning/comments/1hna801/p_reinforce_a_simple_and_efficient_approach_for/"
     },
     {
-      "theme": "Innovative Job-Seeking Strategies for Overqualified Candidates",
+      "theme": "Quantum Teleportation Over Existing Internet Cables Achieved",
       "post_id": [
-        "1h2elir"
-      ]
+        "1hnhmpm"
+      ],
+      "url": "https://www.reddit.com/r/singularity/comments/1hnhmpm/quantum_teleportation_achieved_over_existing/"
     },
     {
-      "theme": "The Shift Towards Non-Traditional Career Paths",
+      "theme": "Transformer Limitations and Circuit Complexity Trade-offs Discussed",
       "post_id": [
-        "1h6saw3"
-      ]
+        "1hnnl6s"
+      ],
+      "url": "https://www.reddit.com/r/MachineLearning/comments/1hnnl6s/d_the_parallelism_tradeoff_understanding/"
+    },
+    {
+      "theme": "Claude 3.5 Sonnet's New Tool for Visualizing Codebases Instantly",
+      "post_id": [
+        "1hnejza"
+      ],
+      "url": "https://v.redd.it/pxd1exhs4e9e1"
     }
   ]
 }
