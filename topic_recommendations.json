@@ -1,39 +1,39 @@
 {
   "themes": [
     {
-      "theme": "OpenAI's Shift to For-Profit Model and Funding Requirements",
+      "theme": "OpenAI's For-Profit Model: Need for More Capital",
       "post_id": [
         "1hnf7mt"
       ],
       "url": "https://www.cnbc.com/2024/12/27/openai-needs-more-capital-than-wed-imagined-moves-to-for-profit.html"
     },
     {
-      "theme": "Innovations in Reinforcement Learning for LLM Alignment: Introduction of REINFORCE++",
+      "theme": "Innovative Tool: GitDiagram Using Claude 3.5 Sonnet for Code Visualization",
       "post_id": [
-        "1hna801"
+        "1hnejza"
       ],
-      "url": "https://www.reddit.com/r/MachineLearning/comments/1hna801/p_reinforce_a_simple_and_efficient_approach_for/"
+      "url": "https://v.redd.it/pxd1exhs4e9e1"
     },
     {
-      "theme": "Quantum Teleportation Over Existing Internet Cables Achieved",
+      "theme": "Quantum Teleportation Achieved Over Existing Internet Infrastructure",
       "post_id": [
         "1hnhmpm"
       ],
       "url": "https://www.reddit.com/r/singularity/comments/1hnhmpm/quantum_teleportation_achieved_over_existing/"
     },
     {
-      "theme": "Transformer Limitations and Circuit Complexity Trade-offs Discussed",
+      "theme": "REINFORCE++: Advancements in RLHF for Large Language Models",
+      "post_id": [
+        "1hna801"
+      ],
+      "url": "https://www.reddit.com/r/MachineLearning/comments/1hna801/p_reinforce_a_simple_and_efficient_approach_for/"
+    },
+    {
+      "theme": "Transformer Expressivity: The Parallelism Tradeoff",
       "post_id": [
         "1hnnl6s"
       ],
       "url": "https://www.reddit.com/r/MachineLearning/comments/1hnnl6s/d_the_parallelism_tradeoff_understanding/"
-    },
-    {
-      "theme": "Claude 3.5 Sonnet's New Tool for Visualizing Codebases Instantly",
-      "post_id": [
-        "1hnejza"
-      ],
-      "url": "https://v.redd.it/pxd1exhs4e9e1"
     }
   ]
 }
