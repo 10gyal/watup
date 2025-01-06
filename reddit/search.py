@@ -91,7 +91,7 @@ def search_subreddits(keywords: List[str]) -> Dict[str, List[Dict]]:
             try:
                 subreddit_info = {
                     "name": subreddit.display_name,
-                    "description": subreddit.description,
+                    "description": subreddit.public_description,
                     "subscribers": subreddit.subscribers,
                     "url": f"https://reddit.com/r/{subreddit.display_name}"
                 }
@@ -104,37 +104,105 @@ def search_subreddits(keywords: List[str]) -> Dict[str, List[Dict]]:
     
     return results
 
-def check_relevancy():
+class Relevancy(BaseModel):
+    relevancy: bool = Field(..., description="Whether the subreddit is relevant to the user profile")
+
+def get_relevant_subreddits(user_profile: str, subreddit_results: Dict[str, List[Dict]]) -> Dict[str, List[Dict]]:
     """
-    For each of the top 5 subreddits from each keyword, get the subreddit description, get top 5 posts of the month, get top 2 comments for each post.
-    Evaluate if the subreddit is relevant to user profile based on the posts and comments.
-    For each subreddit, true if relevant, false otherwise.
+    Filter subreddits based on relevancy to user profile
+    
+    Args:
+        user_profile (str): User profile containing background and intent
+        subreddit_results (Dict[str, List[Dict]]): Results from search_subreddits()
+        
+    Returns:
+        Dict[str, List[Dict]]: Dictionary containing only relevant subreddits
+    """
+    system_message = """
+    You are an intelligent assistant tasked with determining whether a subreddit matches a given user profile. You will be provided with the following inputs:
+    1. The user's profile, including their background (who they are) and goals or interests (their intent).
+    2. The subreddit's name and description.
+
+    Your role is to analyze the provided inputs and assess whether the subreddit could potentially bring any value to the user based on their profile. Consider the user's background, interests, and intent to determine the relevance of the subreddit.
+
+    - Focus on understanding the user's profile and the context of the subreddit.
+    - Evaluate the subreddit name and description for alignment with the user's interests and goals.
+    - Provide a boolean output:
+    - `True` if the subreddit is relevant to the user's profile.
+    - `False` if the subreddit is not relevant to the user's profile.
+
+    Your output must only be `True` or `False`, based on the relevance of the subreddit to the user's profile. Avoid any additional explanations in the output.
     """
 
-    pass
+    relevant_results = {}
+    
+    for keyword, subreddits in subreddit_results.items():
+        relevant_subreddits = []
+        
+        for subreddit in subreddits:
+            subreddit_detail = {
+                "name": subreddit["name"],
+                "description": subreddit["description"],
+                "subscribers": subreddit["subscribers"]
+            }
+            
+            user_message = f"User Profile: {user_profile}\n\nSubreddit Details: {subreddit_detail}"
 
-def get_relevant_subreddits():
-    """
-    Get all the relevant subreddits i.e where "relevancy" is true
-    """
-
-    pass
+            client = OpenAI()
+            response = client.beta.chat.completions.parse(
+                        model="gpt-4o-mini",
+                        messages=[
+                            {"role": "system", "content":system_message},
+                            {"role": "user", "content": user_message},
+                        ],
+                        response_format=Relevancy,
+                    )
+            
+            response = response.choices[0].message.parsed.model_dump()
+            
+            print(f"\nAnalyzing r/{subreddit['name']}...")
+            print(f"Relevancy: {'✓ Relevant' if response['relevancy'] else '✗ Not relevant'}")
+            
+            if response["relevancy"]:
+                relevant_subreddits.append(subreddit)
+        
+        if relevant_subreddits:
+            relevant_results[keyword] = relevant_subreddits
+    
+    return relevant_results
 
 if __name__ == "__main__":
     user_profile = """user_profile":{
         "who": "Aspiring ux designer.",
         "intent": "I want to learn about AI use in Figma Design"
     }"""
+    
+    # Step 1: Extract keywords
     kws = extract_keywords(user_profile)
     print("Extracted Keywords:", kws)
     
-    # Search for subreddits based on keywords
     try:
+        # Step 2: Search for subreddits
         subreddit_results = search_subreddits(kws)
         print("\nFound Subreddits:")
         for keyword, subreddits in subreddit_results.items():
             print(f"\nKeyword: {keyword}")
             for subreddit in subreddits:
                 print(f"- r/{subreddit['name']}: {subreddit['subscribers']} subscribers")
+                print(f"  Description: {subreddit['description']}")
+        
+        # Step 3: Filter and show relevant subreddits
+        print("\nFiltering relevant subreddits...")
+        relevant_results = get_relevant_subreddits(user_profile, subreddit_results)
+        
+        # Print relevant results
+        for keyword, subreddits in relevant_results.items():
+            print(f"\nRelevant subreddits for keyword: {keyword}")
+            for subreddit in subreddits:
+                print(f"\nr/{subreddit['name']}:")
+                print(f"Description: {subreddit['description']}")
+                print(f"Subscribers: {subreddit['subscribers']}")
+
+
     except Exception as e:
-        print(f"Error searching subreddits: {str(e)}")
+        print(f"Error: {str(e)}")
