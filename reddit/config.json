@@ -1,24 +1,19 @@
 {
     "user_profile":{
-        "who": "Lead Developer at Rezi.ai which is an AI-powered resume-building platform designed to help job seekers create optimized resumes that can pass applicant tracking systems (ATS) and increase interview chances",
-        "interest": "AI trends, product optimization, user experience, resume building, job market landscape, and AI transforming HR processes",
-        "intent": "I'm looking to stay updated on the latest trends in AI, product optimization, user experience, resume building, job market landscape, and AI transforming HR processes. I'm also interested in learning about the challenges faced by job seekers and how AI can help them overcome these challenges. I'm also interested in learning if there are any new tools or features that I can integrate into Rezi.ai to improve the user experience and help job seekers create better resumes."
+        "who": "Aspiring ux designer.",
+        "intent": "I want to learn about AI use in Figma Design"
     },
     "subreddits": [
-        "LocalLLaMA",
-        "artificial",
-        "singularity",
-        "ClaudeAI",
-        "OpenAI",
-        "MachineLearning",
-        "ChatGPT"
+        "productdesign",
+        "FigmaDesign",
+        "UX_Design"
     ],
     "scraping": {
-        "posts_limit": 2,
-        "comments_limit": 1,
-        "replies_limit": 1,
-        "comment_depth": 1,
-        "time_filter": "day"
+        "posts_limit": 3,
+        "comments_limit": 3,
+        "replies_limit": 3,
+        "comment_depth": 3,
+        "time_filter": "month"
     },
     "paths": {
         "reddit_data_json": "reddit_data.json",

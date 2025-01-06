@@ -1,39 +1,32 @@
 {
   "themes": [
     {
-      "theme": "OpenAI's For-Profit Model: Need for More Capital",
+      "theme": "New Wave of No-Code Tools Empowering Designers",
       "post_id": [
-        "1hnf7mt"
+        "1h9w4i8"
       ],
-      "url": "https://www.cnbc.com/2024/12/27/openai-needs-more-capital-than-wed-imagined-moves-to-for-profit.html"
+      "url": "https://i.redd.it/l75e6pjbnp5e1.jpeg"
     },
     {
-      "theme": "Innovative Tool: GitDiagram Using Claude 3.5 Sonnet for Code Visualization",
+      "theme": "Rising Relevance of UX/UI Skills in Job Market",
       "post_id": [
-        "1hnejza"
+        "1hs5x9l"
       ],
-      "url": "https://v.redd.it/pxd1exhs4e9e1"
+      "url": "https://www.reddit.com/r/UX_Design/comments/1hs5x9l/data_analyst_or_ux_designer/"
     },
     {
-      "theme": "Quantum Teleportation Achieved Over Existing Internet Infrastructure",
+      "theme": "Legal Considerations for Product Portfolios",
       "post_id": [
-        "1hnhmpm"
+        "1hghsk4"
       ],
-      "url": "https://www.reddit.com/r/singularity/comments/1hnhmpm/quantum_teleportation_achieved_over_existing/"
+      "url": "https://www.reddit.com/r/UX_Design/comments/1hghsk4/i_need_help/"
     },
     {
-      "theme": "REINFORCE++: Advancements in RLHF for Large Language Models",
+      "theme": "Holistic Design Practices Shifting Away from Silos",
       "post_id": [
-        "1hna801"
+        "1hpiw2h"
       ],
-      "url": "https://www.reddit.com/r/MachineLearning/comments/1hna801/p_reinforce_a_simple_and_efficient_approach_for/"
-    },
-    {
-      "theme": "Transformer Expressivity: The Parallelism Tradeoff",
-      "post_id": [
-        "1hnnl6s"
-      ],
-      "url": "https://www.reddit.com/r/MachineLearning/comments/1hnnl6s/d_the_parallelism_tradeoff_understanding/"
+      "url": "https://www.reddit.com/r/productdesign/comments/1hpiw2h/how_does_the_design_process_for_complex_moulded/"
     }
   ]
 }

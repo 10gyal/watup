@@ -1,42 +1,34 @@
 [
   {
-    "theme": "OpenAI's For-Profit Model: Need for More Capital",
+    "theme": "New Wave of No-Code Tools Empowering Designers",
     "post_id": [
-      "1hnf7mt"
+      "1h9w4i8"
     ],
-    "post_url": "https://www.cnbc.com/2024/12/27/openai-needs-more-capital-than-wed-imagined-moves-to-for-profit.html",
-    "post_summary": "OpenAI estimates it requires **$7 trillion** to fund its **for-profit** plan, which indicates a significant increase in capital needs compared to prior expectations. The statement reflects the ambitious scale of its operational model and future growth strategies."
+    "post_url": "https://i.redd.it/l75e6pjbnp5e1.jpeg",
+    "post_summary": "The author expresses a strong fascination with the **\"tactility\" effect**, likely referring to the ability of AI systems to create or enhance textures and tactile sensations in design and art. This concept may involve exploring how neural networks can simulate human touch perceptions or improve interaction experiences through artificial means."
   },
   {
-    "theme": "Innovative Tool: GitDiagram Using Claude 3.5 Sonnet for Code Visualization",
+    "theme": "Rising Relevance of UX/UI Skills in Job Market",
     "post_id": [
-      "1hnejza"
+      "1hs5x9l"
     ],
-    "post_url": "https://v.redd.it/pxd1exhs4e9e1",
-    "post_summary": "**Claude 3.5 Sonnet** introduces **GitDiagram**, a tool that allows users to instantly visualize any **codebase** as an interactive **diagram**. This capability enhances code comprehension and streamlines development processes by providing a clear graphical representation of code structure."
+    "post_url": "https://www.reddit.com/r/UX_Design/comments/1hs5x9l/data_analyst_or_ux_designer/",
+    "post_summary": "The author, with a **bachelor's degree in Fine Arts**, seeks to transition into a stable career with a good salary, contemplating between **UX design** and **data analytics**. They express concern over their lack of a **STEM degree** potentially impacting their success in data analytics."
   },
   {
-    "theme": "Quantum Teleportation Achieved Over Existing Internet Infrastructure",
+    "theme": "Legal Considerations for Product Portfolios",
     "post_id": [
-      "1hnhmpm"
+      "1hghsk4"
     ],
-    "post_url": "https://www.reddit.com/r/singularity/comments/1hnhmpm/quantum_teleportation_achieved_over_existing/",
-    "post_summary": "**Northwestern University engineers** successfully performed **quantum teleportation** over existing internet cables, marking a significant advancement in the field. This achievement could reshape **quantum communication**, negating traditional limitations of distances and latency associated with quantum bits (qubits). More details can be found at [The Quantum Insider](https://thequantuminsider.com/2024/12/27/northwestern-engineers-achieve-quantum-teleportation-over-existing-internet-cable/)."
+    "post_url": "https://www.reddit.com/r/UX_Design/comments/1hghsk4/i_need_help/",
+    "post_summary": "A **junior UX/UI designer** seeks advice on building a **portfolio** that includes self-designed case studies but is concerned about the validity of these projects, especially after hearing that recruiters dismiss **\"fake projects.\"** The designer specifically used **ChatGPT** for simulating user interviews and is unsure about including these elements in their portfolio."
   },
   {
-    "theme": "REINFORCE++: Advancements in RLHF for Large Language Models",
+    "theme": "Holistic Design Practices Shifting Away from Silos",
     "post_id": [
-      "1hna801"
+      "1hpiw2h"
     ],
-    "post_url": "https://www.reddit.com/r/MachineLearning/comments/1hna801/p_reinforce_a_simple_and_efficient_approach_for/",
-    "post_summary": "**REINFORCE++** integrates optimization techniques from **Proximal Policy Optimization (PPO)** into the traditional **REINFORCE** algorithm, enhancing performance and stability in **Reinforcement Learning from Human Feedback (RLHF)** while minimizing computational demands. It demonstrates **greater stability than GRPO** and **faster training than PPO**, with extensive technical details available in the provided links: [Notion Link](https://hijkzzz.notion.site/reinforce-plus-plus) and [Technical Report](https://github.com/hijkzzz/Awesome-LLM-Strawberry/blob/main/resources/REINFORCE%2B%2B.pdf)."
-  },
-  {
-    "theme": "Transformer Expressivity: The Parallelism Tradeoff",
-    "post_id": [
-      "1hnnl6s"
-    ],
-    "post_url": "https://www.reddit.com/r/MachineLearning/comments/1hnnl6s/d_the_parallelism_tradeoff_understanding/",
-    "post_summary": "**Will Merrill** examines transformers from a **circuit complexity** viewpoint, categorizing them in the **TC^0** complexity class, which struggles with inherently sequential problems. The study asserts that while adding chain of thought enhances the problem-solving capabilities of transformers, it sacrifices parallelism and efficient training, advocating for future architectures to balance this tradeoff effectively."
+    "post_url": "https://www.reddit.com/r/productdesign/comments/1hpiw2h/how_does_the_design_process_for_complex_moulded/",
+    "post_summary": "The design process for **complex moulded plastic parts** begins with the **product designer**, who creates the initial concept, focusing on aesthetics and ergonomics. Typically, this design transitions into **CAD modeling**, where specifications such as **wall thicknesses, clips, bosses, ribs**, and **draft angles** are finalized, often necessitating collaboration with **mechanical engineers** or **tool makers** skilled in the nuances of plastic molding."
   }
 ]
