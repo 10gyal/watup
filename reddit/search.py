@@ -10,6 +10,8 @@ from typing import List, Dict, Optional, Tuple
 from openai import OpenAI
 from pydantic import BaseModel, Field
 from dotenv import load_dotenv
+from .auth import get_reddit_instance
+
 
 load_dotenv()
 
@@ -52,11 +54,55 @@ def extract_keywords(user_profile: str):
     return response["keywords"]
 
 
-def search_subreddits():
+def search_subreddits(keywords: List[str]) -> Dict[str, List[Dict]]:
     """
-    Search for relevant subreddits based on keywords
+    Search for relevant subreddits based on keywords coming from extract_keywords()
+    
+    Args:
+        keywords (List[str]): List of keywords to search for
+        
+    Returns:
+        Dict[str, List[Dict]]: Dictionary mapping keywords to lists of subreddit information
+        Example:
+        {
+            "keyword1": [
+                {
+                    "name": "subreddit_name",
+                    "description": "subreddit description",
+                    "subscribers": 1000,
+                    "url": "subreddit_url"
+                },
+                ...
+            ],
+            ...
+        }
     """
-    pass
+    
+    reddit = get_reddit_instance()
+    if not reddit:
+        raise Exception("Failed to authenticate with Reddit")
+    
+    results = {}
+    
+    for keyword in keywords:
+        subreddits = []
+        # Search for subreddits related to the keyword
+        for subreddit in reddit.subreddits.search(keyword, limit=5):
+            try:
+                subreddit_info = {
+                    "name": subreddit.display_name,
+                    "description": subreddit.description,
+                    "subscribers": subreddit.subscribers,
+                    "url": f"https://reddit.com/r/{subreddit.display_name}"
+                }
+                subreddits.append(subreddit_info)
+            except Exception as e:
+                print(f"Error processing subreddit {subreddit.display_name}: {str(e)}")
+                continue
+        
+        results[keyword] = subreddits
+    
+    return results
 
 def check_relevancy():
     """
@@ -80,4 +126,15 @@ if __name__ == "__main__":
         "intent": "I want to learn about AI use in Figma Design"
     }"""
     kws = extract_keywords(user_profile)
-    print(kws)
+    print("Extracted Keywords:", kws)
+    
+    # Search for subreddits based on keywords
+    try:
+        subreddit_results = search_subreddits(kws)
+        print("\nFound Subreddits:")
+        for keyword, subreddits in subreddit_results.items():
+            print(f"\nKeyword: {keyword}")
+            for subreddit in subreddits:
+                print(f"- r/{subreddit['name']}: {subreddit['subscribers']} subscribers")
+    except Exception as e:
+        print(f"Error searching subreddits: {str(e)}")
