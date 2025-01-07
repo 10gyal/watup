@@ -6,6 +6,7 @@ given a user profile, search for relevant subreddits based on keywords
 import praw
 import argparse
 import json
+import pytz
 from typing import List, Dict, Optional, Tuple
 from openai import OpenAI
 from pydantic import BaseModel, Field
@@ -56,7 +57,8 @@ def extract_keywords(user_profile: str):
 
 def search_subreddits(keywords: List[str]) -> Dict[str, List[Dict]]:
     """
-    Search for relevant subreddits based on keywords coming from extract_keywords()
+    Search for relevant subreddits based on keywords coming from extract_keywords().
+    Only includes subreddits that have had posts within the last week.
     
     Args:
         keywords (List[str]): List of keywords to search for
@@ -70,7 +72,8 @@ def search_subreddits(keywords: List[str]) -> Dict[str, List[Dict]]:
                     "name": "subreddit_name",
                     "description": "subreddit description",
                     "subscribers": 1000,
-                    "url": "subreddit_url"
+                    "url": "subreddit_url",
+                    "last_post": "2024-01-20T15:30:00Z"
                 },
                 ...
             ],
@@ -78,22 +81,36 @@ def search_subreddits(keywords: List[str]) -> Dict[str, List[Dict]]:
         }
     """
     
+    from datetime import datetime, timedelta
+    import pytz
+
     reddit = get_reddit_instance()
     if not reddit:
         raise Exception("Failed to authenticate with Reddit")
     
     results = {}
+    one_week_ago = datetime.now(pytz.UTC) - timedelta(days=7)
     
     for keyword in keywords:
         subreddits = []
         # Search for subreddits related to the keyword
         for subreddit in reddit.subreddits.search(keyword, limit=5):
             try:
+                # Check if subreddit has recent posts
+                newest_posts = list(subreddit.new(limit=1))
+                if not newest_posts:
+                    continue
+                    
+                last_post_time = datetime.fromtimestamp(newest_posts[0].created_utc, pytz.UTC)
+                if last_post_time < one_week_ago:
+                    continue
+                
                 subreddit_info = {
                     "name": subreddit.display_name,
                     "description": subreddit.public_description,
                     "subscribers": subreddit.subscribers,
-                    "url": f"https://reddit.com/r/{subreddit.display_name}"
+                    "url": f"https://reddit.com/r/{subreddit.display_name}",
+                    "last_post": last_post_time.isoformat()
                 }
                 subreddits.append(subreddit_info)
             except Exception as e:
@@ -106,6 +123,7 @@ def search_subreddits(keywords: List[str]) -> Dict[str, List[Dict]]:
 
 class Relevancy(BaseModel):
     relevancy: bool = Field(..., description="Whether the subreddit is relevant to the user profile")
+    reasoning: str = Field(..., description="Reasoning behind the relevancy decision")
 
 def get_relevant_subreddits(user_profile: str, subreddit_results: Dict[str, List[Dict]]) -> Dict[str, List[Dict]]:
     """
@@ -131,7 +149,7 @@ def get_relevant_subreddits(user_profile: str, subreddit_results: Dict[str, List
     - `True` if the subreddit is relevant to the user's profile.
     - `False` if the subreddit is not relevant to the user's profile.
 
-    Your output must only be `True` or `False`, based on the relevance of the subreddit to the user's profile. Avoid any additional explanations in the output.
+    Your output must only be `True` or `False`, based on the relevance of the subreddit to the user's profile. Provide clear and concise reasoning for your decision.
     """
 
     relevant_results = {}
@@ -161,7 +179,10 @@ def get_relevant_subreddits(user_profile: str, subreddit_results: Dict[str, List
             response = response.choices[0].message.parsed.model_dump()
             
             print(f"\nAnalyzing r/{subreddit['name']}...")
+            print(f"Description: {subreddit['description']}")
+            print(f"Subscribers: {subreddit['subscribers']}")
             print(f"Relevancy: {'✓ Relevant' if response['relevancy'] else '✗ Not relevant'}")
+
             
             if response["relevancy"]:
                 relevant_subreddits.append(subreddit)
@@ -184,24 +205,24 @@ if __name__ == "__main__":
     try:
         # Step 2: Search for subreddits
         subreddit_results = search_subreddits(kws)
-        print("\nFound Subreddits:")
-        for keyword, subreddits in subreddit_results.items():
-            print(f"\nKeyword: {keyword}")
-            for subreddit in subreddits:
-                print(f"- r/{subreddit['name']}: {subreddit['subscribers']} subscribers")
-                print(f"  Description: {subreddit['description']}")
+        # print("\nFound Subreddits:")
+        # for keyword, subreddits in subreddit_results.items():
+        #     print(f"\nKeyword: {keyword}")
+        #     for subreddit in subreddits:
+        #         print(f"- r/{subreddit['name']}: {subreddit['subscribers']} subscribers")
+        #         print(f"  Description: {subreddit['description']}")
         
         # Step 3: Filter and show relevant subreddits
         print("\nFiltering relevant subreddits...")
         relevant_results = get_relevant_subreddits(user_profile, subreddit_results)
         
         # Print relevant results
-        for keyword, subreddits in relevant_results.items():
-            print(f"\nRelevant subreddits for keyword: {keyword}")
-            for subreddit in subreddits:
-                print(f"\nr/{subreddit['name']}:")
-                print(f"Description: {subreddit['description']}")
-                print(f"Subscribers: {subreddit['subscribers']}")
+        # for keyword, subreddits in relevant_results.items():
+        #     print(f"\nRelevant subreddits for keyword: {keyword}")
+        #     for subreddit in subreddits:
+        #         print(f"\nr/{subreddit['name']}:")
+        #         print(f"Description: {subreddit['description']}")
+        #         print(f"Subscribers: {subreddit['subscribers']}")
 
 
     except Exception as e:
